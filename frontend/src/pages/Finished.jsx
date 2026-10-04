@@ -11,7 +11,7 @@ const Finished = () => {
         .get(`${API}/todos`)
         .then(result => {
           setTodos(result.data.todos)
-          console.log(result.data.todos);
+          window.dispatchEvent(new Event('todoUpdated'))
           
         })
         .catch(error => {

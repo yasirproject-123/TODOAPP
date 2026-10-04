@@ -5,20 +5,16 @@ import axios from 'axios'
 
 const Header = () => {
   const [todoPending, setTodoPending] = useState([])
-  const [loading, setLoading] = useState(true)
-
-
+  const API = "https://todoapp-backend-4yfx.onrender.com"
   const getTodos = () => {
     axios
-      .get('http://localhost:3000/todos/today')
+      .get(`${API}/todos/today`)
       .then(result => {
         setTodoPending(result.data.todos)
-        setLoading(false)
 
       })
       .catch(error => {
         console.log(error)
-        setLoading(false)
       })
   }
 

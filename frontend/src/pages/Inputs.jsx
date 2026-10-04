@@ -18,7 +18,6 @@ const Inputs = ({ onTodoAdded }) => {
       .post(`${API}/newTodo`, {todo, type:"daily", specialDate:date || null})
 
       .then(result => {
-        alert(result.data.message)
         setTodo("")
         setDate(null)
         onTodoAdded()

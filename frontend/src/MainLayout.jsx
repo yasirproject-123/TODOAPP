@@ -20,16 +20,28 @@ const MainLayout = () => {
 
     const [background, setBackground] = useState()
 
+    const [loader, setLoader] = useState(true)
+
+
     const getTodos = () => {
-        axios
+
+        setLoader(true)
+
+        setTimeout(()=>{
+            axios
             .get(`${API}/todos`)
             .then(result => {
                 setTodos(result.data.todos)
-                window.dispatchEvent(new Event('todoUpdated'))
+
             })
             .catch(error => {
                 console.log(error)
             })
+            .finally(()=>{
+                setLoader(false)
+            })
+        },0)
+            
     }
 
     useEffect(() => {
@@ -262,6 +274,20 @@ const MainLayout = () => {
                         )}
 
                     </div>
+
+                    {
+                        loader && (
+                        <div className='loader'>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div
+                                style={{position:'absolute', top:'60%', color:'#fff'}}
+                            >loading</div>
+                        </div>
+                        )
+                    }
                 </div>
 
                 <Footer />
