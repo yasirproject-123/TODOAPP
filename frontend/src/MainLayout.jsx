@@ -6,6 +6,7 @@ import axios from 'axios'
 import bg from './script'
 
 const MainLayout = () => {
+    const API = "https://todoapp-backend-4yfx.onrender.com"
 
     const [todo, setTodo] = useState("")
     const [date, setDate] = useState(null)
@@ -21,7 +22,7 @@ const MainLayout = () => {
 
     const getTodos = () => {
         axios
-            .get('http://localhost:3000/todos')
+            .get(`${API}/todos`)
             .then(result => {
                 setTodos(result.data.todos)
                 window.dispatchEvent(new Event('todoUpdated'))
@@ -56,7 +57,7 @@ const MainLayout = () => {
         
 
         axios
-            .post("http://localhost:3000/newTodo", {
+            .post(`${API}/newTodo`, {
                 todo,
                 type: "monthly",
                 specialDate: date || null
