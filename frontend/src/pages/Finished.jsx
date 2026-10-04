@@ -3,12 +3,12 @@ import axios from 'axios'
 
 
 const Finished = () => {
-
+  const API = "https://todoapp-backend-4yfx.onrender.com"
   const [todos, setTodos] = useState([])
 
   const getTodos = () => {
       axios
-        .get('http://localhost:3000/todos')
+        .get(`${API}/todos`)
         .then(result => {
           setTodos(result.data.todos)
           console.log(result.data.todos);
@@ -21,7 +21,7 @@ const Finished = () => {
 
   const retreiveTodo = (id) => {
     axios
-      .put(`http://localhost:3000/retreive-todo/${id}`)
+      .put(`${API}/retreive-todo/${id}`)
       .then(result => {
         // alert(result.data.message)
         getTodos()

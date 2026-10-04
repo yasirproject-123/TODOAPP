@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const TotoPending = () => {
+  const API = "https://todoapp-backend-4yfx.onrender.com"
+    
     const [todos, setTodos] = useState([])
 
     const today = new Date()
 
     const getTodos = () => {
         axios
-            .get('http://localhost:3000/todos')
+            .get(`${API}/todos`)
             .then(result => {
                 setTodos(result.data.todos)
                 window.dispatchEvent(new Event('todoUpdated'))
@@ -20,7 +22,7 @@ const TotoPending = () => {
 
     const deleteTodo = (id) => {
         axios
-            .delete(`http://localhost:3000/deleteTodo/${id}`)
+            .delete(`${API}/deleteTodo/${id}`)
             .then(result => {
                 // alert(result.data.message)
                 getTodos()

@@ -3,6 +3,7 @@ import Inputs from './Inputs'
 import axios from 'axios'
 
 const Pending = () => {
+  const API = "https://todoapp-backend-4yfx.onrender.com"
 
   const [todoPending, setTodoPending] = useState([])
 
@@ -11,7 +12,7 @@ const Pending = () => {
 
   const getTodos = () => {
     axios
-      .get('http://localhost:3000/todos/today')
+      .get(`${API}/todos/today`)
       .then(result => {
         setTodoPending(result.data.todos)
         window.dispatchEvent(new Event('todoUpdated'))
@@ -25,7 +26,7 @@ const Pending = () => {
   const finishTodos = (id) => {
     
     axios
-      .put(`http://localhost:3000/todos/${id}/complete`)
+      .put(`${API}/todos/${id}/complete`)
       .then(result => {
         // alert(result.data.message)
         getTodos()
