@@ -43,7 +43,7 @@ app.get("/todos/today", async (req, res) => {
                 (
                     type = 'daily'
                     AND specialDate <= CURDATE()
-                    AND status = "pending"
+                    AND status = 'pending'
                 )
                 OR
                 (
@@ -121,7 +121,7 @@ app.put("/todos/:id/complete", async (req, res) => {
     const todoType = rows[0].type;
     const specialDate = rows[0].specialDate;
     
-    if (todoType === "daily") {
+    if (todoType ==='daily') {
       await db.query(
         `
                 UPDATE todolist
@@ -130,7 +130,7 @@ app.put("/todos/:id/complete", async (req, res) => {
                 `,
         [id],
       );
-    } else if (todoType === "monthly") {
+    } else if (todoType === 'monthly') {
 
       await db.query(
         `
@@ -188,7 +188,7 @@ app.put("/retreive-todo/:id", async (req, res) => {
                 `,
         [id],
       );
-    } else if (todoType === "monthly") {
+    } else if (todoType === 'monthly') {
       await db.query(
         `
                 UPDATE todolist
