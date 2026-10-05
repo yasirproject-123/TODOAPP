@@ -607,6 +607,11 @@ input:focus{
 
 
 
+/* =========================================================
+   TABLET / SMALL LAPTOP
+   1024px
+   ========================================================= */
+
 @media (max-width: 1024px) {
 
   .todoList {
@@ -621,10 +626,6 @@ input:focus{
     width: 80%;
   }
 
-  .input {
-    padding: 0 10px;
-  }
-
   .bgContainer {
     width: 75%;
   }
@@ -632,53 +633,84 @@ input:focus{
 }
 
 
+/* =========================================================
+   TABLET
+   768px
+   ========================================================= */
+
 @media (max-width: 768px) {
 
-  /* Header */
-
-  .header {
-    height: 8%;
-  }
-
-  .header h4 {
-    font-size: 15px;
-  }
-
-  .bell p {
-    font-size: 14px;
-  }
-
-  .fa-bell {
-    font-size: 18px;
-    margin: 0 7px;
-  }
-
-
-  /* Main content */
+  /* ---------- Main Layout ---------- */
 
   .contents {
-    height: 60%;
+    display: flex;
     flex-direction: column;
+    height: 90%;
     overflow-y: auto;
     overflow-x: hidden;
   }
 
 
-  /* Todo list becomes full width */
+  /* ---------- Todo Section ---------- */
 
   .todoList {
     width: 100%;
     height: auto;
-    min-height: 55%;
+    min-height: 0;
+    flex-shrink: 0;
   }
 
 
-  /* Cards move below todo list */
+  /* ---------- Navigation ---------- */
 
-  .cards {
+  .buttons {
+    width: 100%;
+    height: 60px;
+    gap: 5px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-shrink: 0;
+  }
+
+  .buttons a {
+    min-width: 70px;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+
+  /* ---------- Todo List ---------- */
+
+  .todo-list-wrapper {
     width: 100%;
     height: auto;
-    top: 120px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 15px 10px;
+  }
+
+  .todo-wrapper {
+    width: 90%;
+    min-height: 50px;
+  }
+
+
+  /* ---------- Cards ---------- */
+
+  .cards {
+    position: relative;
+
+    /* IMPORTANT:
+       Do not use top here */
+    top: auto;
+
+    width: 100%;
+    height: auto;
+    min-height: 0;
+
+    padding-right: 0;
+
+    flex-shrink: 0;
   }
 
   .card {
@@ -687,45 +719,20 @@ input:focus{
   }
 
 
-  /* Navigation buttons */
-
-  .buttons {
-    height: 60px;
-    gap: 5px;
-    overflow-x: auto;
-  }
-
-  a {
-    min-width: 70px;
-    font-size: 14px;
-  }
-
-
-  /* Todo list */
-
-  .todo-list-wrapper {
-    height: auto;
-    max-height: 400px;
-    padding: 15px 10px;
-  }
-
-  .todo-wrapper {
-    width: 90%;
-  }
-
-
-  /* Input */
+  /* ---------- Input ---------- */
 
   .input {
+    width: 100%;
     height: 65px;
+    padding: 0 10px;
     gap: 6px;
   }
 
-  input:nth-child(1) {
+  .input input:nth-child(1) {
     width: 45%;
   }
 
-  input {
+  .input input {
     font-size: 15px;
   }
 
@@ -735,23 +742,33 @@ input:focus{
   }
 
 
-  /* Monthly tasks */
+  /* ---------- Monthly Tasks ---------- */
 
   .monthlyTask {
-    padding-bottom: 15px;
+    width: 100%;
+    margin-left: 5px;
+    padding: 0 5px 15px 0;
   }
 
 
-  /* Background selector */
+  /* ---------- Background Selector ---------- */
 
   .bgContainer {
+    position: absolute;
     top: 60px;
+    right: 0;
+
     width: 90%;
     height: 70%;
+
+    padding: 8px;
+    gap: 8px;
+
+    overflow-y: auto;
   }
 
 
-  /* Menu */
+  /* ---------- Menu ---------- */
 
   .fa-bars {
     right: 10px;
@@ -760,14 +777,14 @@ input:focus{
 }
 
 
-/* =========================
+/* =========================================================
    MOBILE
-   480px and below
-   ========================= */
+   480px
+   ========================================================= */
 
 @media (max-width: 480px) {
 
-  /* Header */
+  /* ---------- Header ---------- */
 
   .header {
     height: 8%;
@@ -788,62 +805,108 @@ input:focus{
   }
 
 
-  /* Main content */
+  /* =====================================================
+     MAIN CONTENT
+     ===================================================== */
 
   .contents {
-    height: 80%;
+    height: 90%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
 
-  /* Navigation */
+  /* =====================================================
+     NAVIGATION BUTTONS
+     ===================================================== */
 
   .buttons {
     height: 55px;
+    width: 100%;
+
     gap: 2px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding-right: 35px;
   }
 
-  a {
+  .buttons a {
     min-width: 58px;
+    width: 58px;
+    flex-shrink: 0;
+
     font-size: 11px;
   }
 
-  a i {
+  .buttons a i {
     font-size: 14px;
   }
 
 
-  /* Todo list */
+  /* =====================================================
+     TODO LIST
+     ===================================================== */
 
   .todoList {
-    min-height: 50%;
+    width: 100%;
+    height: auto;
+    min-height: 0;
   }
 
   .todo-list-wrapper {
     width: 100%;
-    max-height: 270px;
+
+    height: auto;
+    max-height: 350px;
+
     padding: 12px 5px;
+
     gap: 8px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
   }
+
+
+  /* ---------- Todo Item ---------- */
 
   .todo-wrapper {
     width: 94%;
+
     min-height: 48px;
+
     padding: 0 8px;
+
     border-radius: 10px;
   }
 
   .todo {
     width: 78%;
+
     padding: 5px;
+
     font-size: 14px;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .todo p {
     font-size: 10px;
   }
 
+
+  /* ---------- Todo Buttons ---------- */
+
   .todo-list-wrapper button {
+    padding: 5px;
+
     font-size: 11px;
+
+    flex-shrink: 0;
   }
 
   .todo-list-wrapper button i {
@@ -851,51 +914,107 @@ input:focus{
   }
 
 
-  /* Input */
+  /* =====================================================
+     INPUT
+     ===================================================== */
 
   .input {
-    height: auto;
+    width: 100%;
+
     min-height: 65px;
+    height: auto;
+
     padding: 8px 5px;
+
     gap: 5px;
+
+    overflow: hidden;
   }
 
-  input:nth-child(1) {
-    width: 42%;
-  }
-
-  input {
-    width: 25%;
+  .input input {
     height: 38px;
+
     font-size: 13px;
+
     padding: 2px 6px;
+  }
+
+  .input input:nth-child(1) {
+    width: 42%;
+    flex-shrink: 1;
+  }
+
+  .input input:nth-child(2) {
+    width: 28%;
+    flex-shrink: 1;
   }
 
   .input button {
     width: 60px;
     height: 38px;
+
+    flex-shrink: 0;
+
     font-size: 13px;
   }
 
+
+  /* =====================================================
+     CARDS
+     ===================================================== */
+
   .cards {
+    position: relative;
+
+    /* VERY IMPORTANT */
+    top: auto;
+
     width: 100%;
     height: auto;
-    top: 10px;
+
+    min-height: 0;
+
+    padding: 0;
+
+    flex-shrink: 0;
+
+    background: #00000066;
   }
 
-  /* Monthly task */
+  .card {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #fcfcfa42;
+  }
+
+
+  /* =====================================================
+     MONTHLY TASK
+     ===================================================== */
 
   .monthlyTask {
-    margin-left: 5px;
-    padding-right: 5px;
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 0 8px 15px;
+
     gap: 6px;
   }
 
   .monthlyTaskTodo {
     max-width: 100%;
+
     font-size: 12px;
+
     padding: 5px 7px;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
+
+
+  /* ---------- Monthly Input ---------- */
 
   .monthlyTaskInput {
     max-width: 100%;
@@ -903,35 +1022,53 @@ input:focus{
 
   .monthlyTaskInput div {
     flex-direction: column;
+
     gap: 5px;
   }
 
   .monthlyTaskInput input {
     width: 130px;
+    max-width: 130px;
   }
 
 
-  /* Background selector */
+  /* =====================================================
+     BACKGROUND SELECTOR
+     ===================================================== */
 
   .bgContainer {
+    position: absolute;
+
     top: 55px;
+    right: 0;
+
     width: 100%;
     height: 65%;
+
     padding: 8px;
+
     gap: 6px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .bgContainer img,
   .bgContainer div:nth-child(1) {
     width: 85px;
     height: 65px;
+
+    flex-shrink: 0;
   }
 
 
-  /* Menu button */
+  /* =====================================================
+     MENU BUTTON
+     ===================================================== */
 
   .fa-bars {
     right: 5px;
+
     width: 27px;
     height: 19px;
   }
@@ -939,12 +1076,14 @@ input:focus{
 }
 
 
-/* =========================
-   SMALL MOBILE
-   360px and below
-   ========================= */
+/* =========================================================
+   VERY SMALL MOBILE
+   360px
+   ========================================================= */
 
 @media (max-width: 360px) {
+
+  /* ---------- Header ---------- */
 
   .header h4 {
     font-size: 11px;
@@ -954,23 +1093,41 @@ input:focus{
     display: none;
   }
 
-  a {
+
+  /* ---------- Navigation ---------- */
+
+  .buttons {
+    padding-right: 30px;
+  }
+
+  .buttons a {
     min-width: 52px;
+    width: 52px;
+
     font-size: 10px;
   }
 
-  a i {
+  .buttons a i {
     font-size: 13px;
   }
 
+
+  /* ---------- Todo ---------- */
 
   .todo-wrapper {
     width: 96%;
+
+    padding: 0 6px;
   }
 
   .todo {
+    width: 82%;
+
     font-size: 13px;
   }
+
+
+  /* Hide text and keep icon */
 
   .todo-list-wrapper button span {
     display: none;
@@ -981,17 +1138,36 @@ input:focus{
   }
 
 
+  /* ---------- Input ---------- */
+
   .input {
     gap: 3px;
   }
 
-  input {
+  .input input {
     font-size: 12px;
+  }
+
+  .input input:nth-child(1) {
+    width: 40%;
+  }
+
+  .input input:nth-child(2) {
+    width: 27%;
   }
 
   .input button {
     width: 50px;
+
     font-size: 12px;
   }
 
+
+  /* ---------- Monthly ---------- */
+
+  .monthlyTaskTodo {
+    font-size: 11px;
+  }
+
 }
+
