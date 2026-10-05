@@ -23,36 +23,7 @@ body,
 #root{
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(135deg, #15111dd2, #0f0c0f86);
-  background-size: cover;
-  
-}
-
-.bgContainer{
-  position: absolute;
-  right: 0;
-  top: 70px;
-  display: flex;
-
-  background: #c1c1;
-  flex-direction: column;
-  height: 85%;
-  overflow: auto;
-  animation: opacity .5s;
-}
-
-.bgContainer img{
-  height: 100px;
-  margin: 5px;
-  border-radius: 8px;
-}
-
-.fa-bars{
-  position: absolute;
-  right: 0;
-  height: 100%;
-  background-color: #1c1c1c;
-  padding: 10px;
+  background: linear-gradient(135deg, #11121dd2, #0c0a0c86);
 }
 
 .mainLayout{
@@ -101,19 +72,18 @@ body,
 }
 
 .footer{
-  height: 8%;
+  height: 2%;
   background: #202020;
 }
 
 .buttons{
-  position: relative;
   height: 70px;
   width: 100%;
-  backdrop-filter: blur(10px);
   border-bottom: 1px solid #c1c1c1;
   display: flex;
   flex-direction: row;
   gap: 10px;
+  backdrop-filter: blur(5px);
 }
 
 .todo-list-wrapper button{
@@ -129,11 +99,10 @@ body,
 .contents{
   position: relative;
   display: flex;
-  gap: 0px;
-  height: 84%;
-  background-position: center;
+  height: 90%;
   background-size: cover;
-  
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .todoList{
@@ -144,6 +113,12 @@ body,
 
 .cards{
   width: 40%;
+  position: relative;
+  
+}
+
+.card{
+  border-left: 1px solid #fcfcfa42;
 }
 
 a{
@@ -164,7 +139,6 @@ a{
   padding: 15px 0;
   align-items: center;
   gap: 10px;
-  
 }
 
 .todo-wrapper{
@@ -173,28 +147,24 @@ a{
   align-items: center;
   justify-content: space-between;
   width: 50%;
-  min-height: 45px;
+  min-height: fit-content;
   padding: 0px 20px;
-  border-radius: 18px;
+  border-radius: 15px;
 
-  background: transparent;
+  background: #05050500;
 
-  border-top: 1px solid transparent;
+  border-top: 1px solid #00000017;
   backdrop-filter: 
-    blur(20px)
-    brightness(110%)
-    contrast(110%)
-    saturate(120%)
-    opacity(90%)
-    grayscale(10%)
-    invert(3%);
+    blur(2px)
+
   ;
   box-shadow:
     0 6px 5px #00000081,
     inset 1px 3px 3px -3px #ffffffa8,
     inset 0 -2px 5px -3px #fdfdfd77;
 
-  color: #fcfdfd;
+  color: #ffffff;
+  text-shadow: 2px 1px 1px #000000;
   overflow: hidden;
 }
 
@@ -231,60 +201,66 @@ a{
   }
 }
 
-@keyframes opacity {
-    0% {
-    transform: translateX(150px);
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-}
-
 .todo{
   position: relative;
   padding: 5px 10px;
   border-radius: 5px;
   transition: .2s;
   width: 85%;
+  height: 100%;
   word-wrap: break-word;
- 
+  
+}
+
+.todo p{
+  color: #5f5f5f;
+  font-size: 13px;
+  font-weight: 600;
+  text-shadow: 0 0 0;
+}
+
+.monthlyTask{
+  margin-left: 10px;
+}
+
+.monthlyTaskTodo{
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: .2s;
+  font-weight: 600;
+  width: fit-content;
+  word-wrap: break-word;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: 
+    blur(2px)
+    contrast(110%)
+  ;
+  border:1px solid #0000002c;
+  
 }
 
 .monthlyTask-todo-done{
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: .2s;
-  width: fit-content;
-  word-wrap: break-word;
-  background: #1efa0100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  backdrop-filter: blur(100px);
-  box-shadow: 1px 3px 10px #000,
-  inset 1px -2px 5px #07070798;
+  
+  box-shadow: 3px 3px 5px #00000070,
+    inset 1px 3px 3px -3px #08c908,
+    inset 0 -2px 5px -3px #08c908
+  ;
   color: #08c908;
+  
 }
 
 .monthlyTask-todo-pending{
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: .2s;
-  width: fit-content;
-  word-wrap: break-word;
-  background: #fc020200;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  backdrop-filter: blur(100px);
-  box-shadow: 1px 4px 10px #000,
-  inset 2px -2px 5px #0e0e0ec7;
+  
+  box-shadow: 3px 3px 5px #00000070,
+    inset 1px 3px 3px -3px #ff0000,
+    inset 0 -2px 5px -3px #ff0000
+  ;
   color: #ff0000;
+  
 }
 
 .input{
@@ -294,24 +270,34 @@ a{
   height: 70px;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(10px);
   border-bottom: 1px solid #c1c1c1;
+  backdrop-filter: blur(5px);
 }
 
 input:nth-child(1){
   width: 50%;
 }
 
-.input input{
+input{
   height: 50%;
   border-radius: 8px;
   padding: 2px 10px;
   outline: none;
-  border: 1px solid #858585;
+  border: 1px solid #85858500;
   background: #5352523e;
   color: #fff;
   font-size: 17px;
+  opacity: 1;
+  box-shadow:
+    0 6px 5px #00000070,
+    inset 0px 2px 2px -1px #ffffffaf,
+    inset 0 -2px 2px -2px #fdfdfd67;
+  animation: inputsanimation .8s ease ;
+}
+
+input:focus{
   
+  background: #00000015;
 }
 
 .input button{
@@ -324,21 +310,13 @@ input:nth-child(1){
   border: 1px solid #858585;
   font-size: 18px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .input button:focus, .input button:hover{
   color: #fff;
-  background: #1100ff6f;
+  background: #0051ff;
   
-}
-
-.monthlyTaskInputForm{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 5px;
-  width: 100%;
- 
 }
 
 .monthlyTaskInput{
@@ -346,35 +324,14 @@ input:nth-child(1){
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  width: 100%;
   width: fit-content;
  
 }
-.fa-calendar{
-  color: rgb(42, 228, 4);
-}
 
-.fa-calendar-xmark{
-  color: red;
-}
-
-p{
-  color: #434343;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.monthlyTaskInput input{
-  color: #ffffff;
-  width: 100%;
-  padding: 5px;
-  background: #212121;
-  border: 1px solid #c1c1c176;
-  outline: none;
-  border-radius: 8px;
-}
-
-.monthlyTaskInput input{
+.monthlyTaskInput div{
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
   width: 100%;
 }
 
@@ -384,6 +341,211 @@ p{
   gap: 10px;
   width: 100%;
   
+}
+
+@keyframes inputsanimation {
+  from {
+    opacity: 0;
+    
+  }
+
+  to {
+    opacity: 1;
+    
+  }
+}
+
+.fa-plus{
+  color: #00ff0098;
+  backdrop-filter: blur(5px);
+  box-shadow:0 6px 5px #fa030381;
+  animation: animation2 .8s ease-in-out;
+}
+
+.fa-close{
+  color: #ff000080;
+  backdrop-filter: blur(5px);
+  animation: inputsanimation .8s ease-in-out;
+}
+
+.fa-plus {
+  position: relative;
+  background: rgba(255, 0, 0, 0);
+  padding: 7px;
+  border-radius: 50%;
+  border: 1px solid #1f1f1f41;
+  overflow: hidden;
+  box-shadow:
+    0 0 5px #ffffff2c,
+    inset 0px 2px 2px -1px #ffffffaf,
+    inset 0 -2px 2px -2px #fdfdfd67;
+  
+}
+
+.fa-close{
+  position: relative;
+  background: rgba(255, 0, 0, 0);
+  padding: 7px 9px;
+  border-radius: 50%;
+  border: 1px solid #1f1f1f41;
+  overflow: hidden;
+  box-shadow:
+    0 0 5px #fdfdfd2c,
+    inset 0px 2px 2px -1px #ffffffaf,
+    inset 0 -2px 2px -2px #fdfdfd67;
+  
+}
+
+.fa-plus::after, .fa-close::after{
+  position: absolute;
+  content: '';
+  width: 20px;
+  height: 100%;
+  left: -10px;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff05,
+    #ffffff10
+  );
+
+  clip-path: polygon(
+    30% 0,
+    100% 0,
+    70% 100%,
+    0 100%
+  );
+
+  animation: movingGlass 2s ease-in-out infinite;
+}
+
+/* .fa-plus:active, .fa-close:active{
+  animation: animation2 .5s ease-in-out;
+} */
+
+@keyframes animation2 {
+  0%{
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.bgContainer{
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  right: 0;
+  top: 70px;
+  padding: 5px 10px;
+  
+  gap: 10px;
+  backdrop-filter: blur(10px);
+  background: #3131312d;
+  height: 87%;
+  width: 65%;
+  animation: bgContainer .5s;
+  overflow: auto;
+}
+
+.bgContainer div:nth-child(1){
+  background-image: url("https://4kwallpapers.com/images/wallpapers/dark-blue-circles-3840x2160-12670.jpg");
+  position: relative;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  height: 80px;
+  width: 100px;
+  text-align: center;
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+}
+
+.bgContainer div:nth-child(1) p{
+  position: absolute;
+  color: #c1c1c17a;
+  bottom: 0;
+}
+
+.bgContainer img{
+  width: 100px;
+  height: 80px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@keyframes bgContainer {
+  0%{
+    transform: translateX(30px);
+  }
+
+  50%{
+    transform: translateX(-5px);
+  }
+
+  100%{
+    transform: translateX(0px);
+  }
+}
+
+.fa-bars {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    top: 50%;
+    right:20px; 
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(69, 70, 69, 0.356);
+    transition: 0.3s ease;
+    border-radius: 8px;
+}
+
+.bar {
+    width: 60%;
+    height: 2px;
+    position: relative;
+    left: 0;
+    transition: 0.3s ease;
+    background: #ff5e00;
+}
+
+.bar1 { top: -2px; }
+.bar2 { top: 3px; }
+
+/* Cross */
+.fa-bars.active .bar1 {
+    top: 0px;
+    transform: rotate(45deg);
+    background: red;
+    width: 50%;
+}
+
+.fa-bars.active {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.fa-bars.active .bar2 {
+    top: -2px;
+    opacity: 1;
+    background: red;
+    transform: rotate(-45deg);
+    width: 50%;
 }
 
 .loader{
@@ -402,8 +564,8 @@ p{
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    border-left: 3px solid red;
-    animation: loader 1s linear infinite forwards;
+    border-top: 3px solid red;
+    animation: loader 1s linear infinite reverse;
 }
 
 .loader :nth-child(2) {
@@ -412,7 +574,7 @@ p{
     height: 60px;
     border-radius: 50%;
     border-bottom: 3px solid rgb(43, 0, 255);
-    animation: loader 1s linear infinite reverse;
+    animation: loader 1s linear infinite forwards;
 }
 
 .loader :nth-child(3) {
@@ -420,16 +582,16 @@ p{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border-right: 3px solid rgb(0, 255, 21);
-    animation: loader 1s linear infinite forwards;
+    border-left: 3px solid rgb(0, 255, 21);
+    animation: loader 1s linear infinite reverse;
 }
 .loader :nth-child(4) {
     position: absolute;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border-top: 3px solid rgb(247, 0, 255);
-    animation: loader 1s linear infinite reverse;
+    border-right: 3px solid rgb(247, 0, 255);
+    animation: loader 1s linear infinite forwards;
 }
 
 
