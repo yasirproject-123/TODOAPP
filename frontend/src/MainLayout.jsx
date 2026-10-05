@@ -38,7 +38,7 @@ const MainLayout = () => {
                 console.log(error)
             })
             .finally(()=>{
-                setLoader(false)
+                // setLoader(false)
             })
         },0)
             
@@ -283,7 +283,7 @@ const MainLayout = () => {
                             <div></div>
                             <div></div>
                             <div
-                                style={{position:'absolute', top:'60%', color:'#fff'}}
+                                style={{position:'absolute', top:'48%', color:'#fff',fontSize:'10px'}}
                             >loading</div>
                         </div>
                         )
