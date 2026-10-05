@@ -65,7 +65,7 @@ const MainLayout = () => {
         console.log({ todo, type: "monthly", specialDate: date });
 
         axios
-            .post("http://localhost:3000/newTodo", {
+            .post(`${API}/newTodo`, {
                 todo,
                 type: "monthly",
                 specialDate: date || null
