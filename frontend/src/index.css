@@ -657,7 +657,7 @@ input:focus{
   /* Main content */
 
   .contents {
-    height: 70%;
+    height: 60%;
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
@@ -791,7 +791,7 @@ input:focus{
   /* Main content */
 
   .contents {
-    height: 90%;
+    height: 70%;
   }
 
 
