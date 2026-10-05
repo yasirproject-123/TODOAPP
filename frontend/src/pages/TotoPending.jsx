@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const TotoPending = () => {
-  const API = "https://todoapp-backend-4yfx.onrender.com"
-    
+
+    const API = "https://todoapp-backend-4yfx.onrender.com"
+
     const [todos, setTodos] = useState([])
 
     const today = new Date()
@@ -51,7 +52,7 @@ const TotoPending = () => {
     return (
         <div>
             <div className='input'>
-                <h3>All Up Pending To Do list</h3>
+                <h3>Up Comings </h3>
             </div>
 
             <div className='todo-list-wrapper'>
@@ -61,7 +62,7 @@ const TotoPending = () => {
                             return <div key={index} className='todo-wrapper'>
                                 <div className='todo'>
                                     <div>{todo.todo}</div>
-                                    <p>{`Coming On : ${todo.specialDate}`}</p>
+                                    <p>{`Due on : ${todo.specialDate}` }</p>
                                 </div>
                                 <div>
                                     <button
@@ -80,7 +81,6 @@ const TotoPending = () => {
                 }
 
             </div>
-            
         </div>
     )
 }
