@@ -604,3 +604,394 @@ input:focus{
     rotate: 360deg;
   }
 }
+
+
+
+@media (max-width: 1024px) {
+
+  .todoList {
+    width: 55%;
+  }
+
+  .cards {
+    width: 45%;
+  }
+
+  .todo-wrapper {
+    width: 80%;
+  }
+
+  .input {
+    padding: 0 10px;
+  }
+
+  .bgContainer {
+    width: 75%;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  /* Header */
+
+  .header {
+    height: 8%;
+  }
+
+  .header h4 {
+    font-size: 15px;
+  }
+
+  .bell p {
+    font-size: 14px;
+  }
+
+  .fa-bell {
+    font-size: 18px;
+    margin: 0 7px;
+  }
+
+
+  /* Main content */
+
+  .contents {
+    height: 90%;
+    flex-direction: column;
+    overflow: auto;
+  }
+
+
+  /* Todo list becomes full width */
+
+  .todoList {
+    width: 100%;
+    height: auto;
+    min-height: 55%;
+  }
+
+
+  /* Cards move below todo list */
+
+  .cards {
+    width: 100%;
+    height: auto;
+    top: 120px;
+  }
+
+  .card {
+    border-left: none;
+    border-top: 1px solid #fcfcfa42;
+  }
+
+
+  /* Navigation buttons */
+
+  .buttons {
+    height: 60px;
+    gap: 5px;
+    overflow-x: auto;
+  }
+
+  a {
+    min-width: 70px;
+    font-size: 14px;
+  }
+
+
+  /* Todo list */
+
+  .todo-list-wrapper {
+    height: auto;
+    max-height: 400px;
+    padding: 15px 10px;
+  }
+
+  .todo-wrapper {
+    width: 90%;
+  }
+
+
+  /* Input */
+
+  .input {
+    height: 65px;
+    gap: 6px;
+  }
+
+  input:nth-child(1) {
+    width: 45%;
+  }
+
+  input {
+    font-size: 15px;
+  }
+
+  .input button {
+    width: 80px;
+    font-size: 16px;
+  }
+
+
+  /* Monthly tasks */
+
+  .monthlyTask {
+    padding-bottom: 15px;
+  }
+
+
+  /* Background selector */
+
+  .bgContainer {
+    top: 60px;
+    width: 90%;
+    height: 70%;
+  }
+
+
+  /* Menu */
+
+  .fa-bars {
+    right: 10px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+   480px and below
+   ========================= */
+
+@media (max-width: 480px) {
+
+  /* Header */
+
+  .header {
+    height: 8%;
+  }
+
+  .header h4 {
+    font-size: 13px;
+    margin: 0 5px;
+  }
+
+  .bell p {
+    font-size: 12px;
+  }
+
+  .fa-bell {
+    font-size: 16px;
+    margin: 0 5px;
+  }
+
+
+  /* Main content */
+
+  .contents {
+    height: 90%;
+  }
+
+
+  /* Navigation */
+
+  .buttons {
+    height: 55px;
+    gap: 2px;
+  }
+
+  a {
+    min-width: 58px;
+    font-size: 11px;
+  }
+
+  a i {
+    font-size: 14px;
+  }
+
+
+  /* Todo list */
+
+  .todoList {
+    min-height: 50%;
+  }
+
+  .todo-list-wrapper {
+    width: 100%;
+    max-height: 290px;
+    padding: 12px 5px;
+    gap: 8px;
+  }
+
+  .todo-wrapper {
+    width: 94%;
+    min-height: 48px;
+    padding: 0 8px;
+    border-radius: 10px;
+  }
+
+  .todo {
+    width: 78%;
+    padding: 5px;
+    font-size: 14px;
+  }
+
+  .todo p {
+    font-size: 10px;
+  }
+
+  .todo-list-wrapper button {
+    font-size: 11px;
+  }
+
+  .todo-list-wrapper button i {
+    font-size: 14px;
+  }
+
+
+  /* Input */
+
+  .input {
+    height: auto;
+    min-height: 65px;
+    padding: 8px 5px;
+    gap: 5px;
+  }
+
+  input:nth-child(1) {
+    width: 42%;
+  }
+
+  input {
+    width: 25%;
+    height: 38px;
+    font-size: 13px;
+    padding: 2px 6px;
+  }
+
+  .input button {
+    width: 60px;
+    height: 38px;
+    font-size: 13px;
+  }
+
+  .cards {
+    width: 100%;
+    height: auto;
+    top: 145px;
+  }
+
+
+  /* Monthly task */
+
+  .monthlyTask {
+    margin-left: 5px;
+    padding-right: 5px;
+    gap: 6px;
+  }
+
+  .monthlyTaskTodo {
+    max-width: 100%;
+    font-size: 12px;
+    padding: 5px 7px;
+  }
+
+  .monthlyTaskInput {
+    max-width: 100%;
+  }
+
+  .monthlyTaskInput div {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .monthlyTaskInput input {
+    width: 130px;
+  }
+
+
+  /* Background selector */
+
+  .bgContainer {
+    top: 55px;
+    width: 100%;
+    height: 65%;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .bgContainer img,
+  .bgContainer div:nth-child(1) {
+    width: 85px;
+    height: 65px;
+  }
+
+
+  /* Menu button */
+
+  .fa-bars {
+    right: 5px;
+    width: 27px;
+    height: 19px;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+   360px and below
+   ========================= */
+
+@media (max-width: 360px) {
+
+  .header h4 {
+    font-size: 11px;
+  }
+
+  .bell p {
+    display: none;
+  }
+
+  a {
+    min-width: 52px;
+    font-size: 10px;
+  }
+
+  a i {
+    font-size: 13px;
+  }
+
+
+  .todo-wrapper {
+    width: 96%;
+  }
+
+  .todo {
+    font-size: 13px;
+  }
+
+  .todo-list-wrapper button span {
+    display: none;
+  }
+
+  .todo-list-wrapper button {
+    padding: 5px 8px;
+  }
+
+
+  .input {
+    gap: 3px;
+  }
+
+  input {
+    font-size: 12px;
+  }
+
+  .input button {
+    width: 50px;
+    font-size: 12px;
+  }
+
+}
