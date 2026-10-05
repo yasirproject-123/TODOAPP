@@ -134,7 +134,7 @@ a{
 .todo-list-wrapper{
   display: flex;
   flex-direction: column;
-  height: 390px;
+  height: 70vh;
   overflow: auto;
   padding: 15px 0;
   align-items: center;
