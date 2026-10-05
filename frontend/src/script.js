@@ -1,113 +1,50 @@
-const bg = [
-    // 🌌 Space
-    {
-        image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=3840&q=90"
-    },
-    
+const images = [
+  
+  {
+    url: "https://images8.alphacoders.com/477/thumb-1920-477623.jpg"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://4kwallpapers.com/images/wallpapers/dark-background-abstract-background-network-3d-background-7680x4320-8324.png"
+  },
+  {
+    url: "https://wallpaperswide.com/download/dark_abstract_digital_art-wallpaper-3840x2160.jpg"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1620121692029-d088224ddc74?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://4kwallpapers.com/images/wallpapers/dark-purple-1920x1080-17330.png"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2560&q=90"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=2560&q=85",
+  },
 
-    // 🤖 Cyberpunk
-    {
-        image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1604076913837-52ab5629fba9?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=3840&q=90"
-    },
-
-    // 💻 Technology
-    {
-        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=3840&q=90"
-    },
-
-    // 🏙️ Cities
-    {
-        image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=3840&q=90"
-    },
-
-    // 🚗 Cars
-    {
-        image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?w=3840&q=90"
-    },
-
-    // 🎮 Gaming
-    {
-        image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=3840&q=90"
-    },
-
-    // 🔮 Abstract
-    {
-        image: "https://images.unsplash.com/photo-1557683316-973673baf926?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=3840&q=90"
-    },
-
-    // 🧊 Glass / 3D
-    {
-        image: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=3840&q=90"
-    },
-
-    // 🖤 Dark
-    {
-        image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1500534623283-312aade485b7?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=3840&q=90"
-    },
-
-    // 🌈 Colorful
-    {
-        image: "https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1497250681960-ef046c08a56e?w=3840&q=90"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=3840&q=90"
-    }
 ];
-
-
-
-export default bg;
+export default images;
