@@ -659,7 +659,8 @@ input:focus{
   .contents {
     height: 90%;
     flex-direction: column;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
 
