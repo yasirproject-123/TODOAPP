@@ -32,11 +32,12 @@ const MainLayout = () => {
             .then(result => {
                 setTodos(result.data.todos)
                 // window.dispatchEvent(new Event('todoUpdated'))
+                setLoader(false)
             })
             .catch(error => {
                 console.log(error)
             })
-            .finally(()=>{setLoader(false)})
+            
     }
 
     useEffect(() => {
