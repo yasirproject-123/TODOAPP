@@ -820,7 +820,7 @@ input:focus{
 
   .todo-list-wrapper {
     width: 100%;
-    max-height: 290px;
+    max-height: 400px;
     padding: 12px 5px;
     gap: 8px;
   }
@@ -880,9 +880,8 @@ input:focus{
   .cards {
     width: 100%;
     height: auto;
-    top: 145px;
+    top: 60px;
   }
-
 
   /* Monthly task */
 
