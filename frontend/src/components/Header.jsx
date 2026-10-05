@@ -4,8 +4,12 @@ import axios from 'axios'
 
 
 const Header = () => {
-  const [todoPending, setTodoPending] = useState([])
+
   const API = "https://todoapp-backend-4yfx.onrender.com"
+
+  const [todoPending, setTodoPending] = useState([])
+
+
   const getTodos = () => {
     axios
       .get(`${API}/todos/today`)
@@ -15,6 +19,7 @@ const Header = () => {
       })
       .catch(error => {
         console.log(error)
+        setLoading(false)
       })
   }
 
