@@ -3,45 +3,40 @@ import { NavLink, Outlet } from "react-router-dom"
 import Header from "./components/Header"
 import Footer from './components/Footer'
 import axios from 'axios'
-import bg from './script'
+import images from './script'
 
 const MainLayout = () => {
+
     const API = "https://todoapp-backend-4yfx.onrender.com"
 
+    const [loader, setLoader] = useState(true)
+
     const [todo, setTodo] = useState("")
-    const [date, setDate] = useState(null)
+    const [date, setDate] = useState("")
 
     const [addMonthltTask, setAddMonthltTask] = useState(false)
     const [todos, setTodos] = useState([])
 
-    const [enableDate, setEnableDate] = useState(false)
-
-    const [bgImages, setBgImages] = useState(false)
-
-    const [background, setBackground] = useState()
-
-    const [loader, setLoader] = useState(true)
+    const [bg, setBg] = useState(()=>{
+        const savedBg = localStorage.getItem('bg')
+        return savedBg ? JSON.parse(savedBg) : ''
+    })
+    const [bgConatiner, setBgConatiner] = useState(false)
 
 
     const getTodos = () => {
-
         setLoader(true)
-
-        setTimeout(()=>{
-            axios
+        
+        axios
             .get(`${API}/todos`)
             .then(result => {
                 setTodos(result.data.todos)
-
+                // window.dispatchEvent(new Event('todoUpdated'))
             })
             .catch(error => {
                 console.log(error)
             })
-            .finally(()=>{
-                setLoader(false)
-            })
-        },0)
-            
+            .finally(()=>{setLoader(false)})
     }
 
     useEffect(() => {
@@ -58,18 +53,18 @@ const MainLayout = () => {
             window.removeEventListener('todoUpdated', handleTodoUpdated)
         }
 
+        
+
     }, [])
-
-
 
 
     const handleSubmit = (e) => {
 
         e.preventDefault()
-        
+        console.log({ todo, type: "monthly", specialDate: date });
 
         axios
-            .post(`${API}/newTodo`, {
+            .post("http://localhost:3000/newTodo", {
                 todo,
                 type: "monthly",
                 specialDate: date || null
@@ -78,7 +73,7 @@ const MainLayout = () => {
             .then(result => {
 
                 setTodo("")
-                setDate(null)
+                setDate("")
                 getTodos()
 
             })
@@ -88,194 +83,175 @@ const MainLayout = () => {
 
     const monthlyTodos = todos.filter(todo => todo.type === "monthly")
 
+    const handleSetBg = (url) => {
+        
+        localStorage.setItem("bg", JSON.stringify(url))
+
+        const bgImg = JSON.parse(localStorage.getItem('bg'))
+
+        setBg(bgImg)
+
+    }
+
     return (
-        <>
-            <div className='mainLayout'>
+      <>
+        <div className="mainLayout">
+          <Header />
 
-                <Header />
+          <div className="contents" style={{ backgroundImage: `url(${bg})` }}>
+            <div className="todoList">
+              <Outlet />
+            </div>
 
-                <div 
-                    className='contents'
-                    style={{backgroundImage:`url(${background}`}}
+            <div className="cards">
+              <div className="buttons">
+                <NavLink
+                  to="/"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#99ff00" : "#ff7700",
+                  })}
                 >
+                  <i className="fas fa-arrow-left"></i>
+                  <span>Back</span>
+                </NavLink>
 
-                    <div className='todoList'>
-                        <Outlet />
-                    </div>
+                <NavLink
+                  to="/todo-Pending"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#99ff00" : "#ff7700",
+                  })}
+                >
+                  <i className="fas fa-list"></i>
+                  <span>Pending</span>
+                </NavLink>
 
-                    <div className='cards'
-                        style={{position:'relative'}}
-                    >
+                <NavLink
+                  to="/todo-finished"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#99ff00" : "#ff7700",
+                  })}
+                >
+                  <i className="fas fa-list-check"></i>
+                  <span>Old List</span>
+                </NavLink>
 
-                        <div className='buttons'>
+                <div
+                  className={`fa-bars ${bgConatiner ? "active" : ""}`}
+                  onClick={() => setBgConatiner(!bgConatiner)}
+                >
+                  <div className="bar bar1"></div>
+                  <div className="bar bar2"></div>
+                </div>
 
-                            <NavLink to="/"
-                                style={({ isActive }) => ({
-                                    color: isActive ? "#99ff00" : "#ff7700",
-                                })}
-                            >
-                                <i className='fas fa-arrow-left'></i>
-                                <span>Back</span>
-                            </NavLink>
+              </div>
 
-                            <NavLink to="/todo-Pending"
-                                style={({ isActive }) => ({
-                                    color: isActive ? "#99ff00" : "#ff7700",
-                                })}
-                            >
-                                <i className='fas fa-list'></i>
-                                <span>Pending</span>
-                            </NavLink>
+              <div
+                className='card'
+              >
+                <p
+                  style={{
+                    background: "transparent",
+                    boxShadow:`
+                      3px 3px 5px #050505a1,
+                      inset 1px 3px 3px -3px #aaaaaa,
+                      inset 0 -2px 5px -3px #acacac
+                    `,
+                    backdropFilter:`
+                      blur(2px)
+                      contrast(110%)
+                    `,
+                    width: "fit-content",
+                    padding: "3px 10px",
+                    margin: "15px 0",
+                    borderRadius: "5px",
+                    fontSize:'18px',
+                    fontWeight:'600',
+                    letterSpacing: "1px",
+                    color:'#eeff00',
+                    textDecoration:'underline',
+                    border:'1px solid #0000002c',
+                    marginLeft: "10px"
+                  }}
+                >
+                  Monthly Task
+                </p>
 
-                            <NavLink to="/todo-finished"
-                                style={({ isActive }) => ({
-                                    color: isActive ? "#99ff00" : "#ff7700",
-                                })}
-                            >
-                                <i className='fas fa-list-check'></i>
-                                <span>Old List</span>
-                            </NavLink>
-                                <i 
-                                    className='fas fa-bars'
-                                    onClick={()=>{
-                                        bgImages === false ? setBgImages(true) : setBgImages(false)
-                                    }}
-                                ></i>
+                <div className="monthlyTask">
+                  {monthlyTodos.map((li, index) => {
+                    return (
+                      <div
+                        className={`monthlyTaskTodo ${
+                          new Date(li.lastCompleted).getMonth() ===
+                            new Date().getMonth() &&
+                          new Date(li.lastCompleted).getFullYear() ===
+                            new Date().getFullYear()
+                            ? "monthlyTask-todo-done"
+                            : "monthlyTask-todo-pending"
+                        }`}
+                        key={index}
+                      >
+                        {li.todo}
+                      </div>
+                    );
+                  })}
 
+                  <form className="monthlyTaskInput" onSubmit={handleSubmit}>
+                    {addMonthltTask && (
+                      <div>
+                        <input
+                          type="text"
+                          value={todo}
+                          placeholder="Monthly Task"
+                          required
+                          onChange={(e) => setTodo(e.target.value)}
+                        />
 
-                        </div>
+                        <input
+                          type="date"
+                          value={date}
+                          required
+                          onChange={(e) => setDate(e.target.value)}
+                        />
+                      </div>
+                    )}
 
-                        <div
-                            
-                        >
-
-                            <p
-                                style={{
-                                    background: "#1d1d1d",
-                                    width: "fit-content",
-                                    padding: '5px',
-                                    margin: '15px 0',
-                                    borderRadius: '8px',
-                                    boxShadow: '0 0 10px #000000'
-                                    
-                                }}
-                            >Monthly Entry</p>
-
-                            <div className='monthlyTask'>
-
-                                {
-                                    monthlyTodos.map((li, index) => {
-
-                                        return (
-                                            <div
-                                                className={
-                                                    
-                                                    `${new Date(li.lastCompleted).getMonth() === new Date().getMonth() &&
-                                                        new Date(li.lastCompleted).getFullYear() === new Date().getFullYear()
-                                                        ? "monthlyTask-todo-done"
-                                                        : "monthlyTask-todo-pending"
-                                                    }`
-                                                }
-                                                key={index}
-                                            >
-                                                {li.todo}
-                                            </div>
-                                        )
-
-                                    })
-                                }
-
-                                <form
-                                    className='monthlyTaskInputForm'
-                                    onSubmit={handleSubmit}
-                                >
-
-                                    {
-                                        addMonthltTask && (
-
-                                            <div className='monthlyTaskInput'>
-
-                                                <input
-                                                    type="text"
-                                                    value={todo}
-                                                    placeholder='TO DO'
-                                                    onChange={(e) =>
-                                                        setTodo(e.target.value)
-                                                    }
-                                                />
-                                                {
-                                                    enableDate && (
-                                                        <input
-                                                            type="date"
-                                                            value={date}
-                                                            onChange={(e) => setDate(e.target.value)}
-                                                        />
-                                                    )
-                                                }
-                                                
-                                                <i
-                                                className={`${!enableDate ? "fas fa-calendar" : "fas fa-calendar-xmark"}`}
-                                                onClick={()=>{
-                                                    enableDate !== true ? setEnableDate(true) : setEnableDate(false)
-                                                }}
-                                                title={`${!enableDate ? "Enable" : "Disable"}`}
-                                                ></i>
-
-                                            </div>
-
-                                        )
-                                    }
-
-                                    <i
-                                        className={
-                                            !addMonthltTask
-                                                ? "fas fa-plus"
-                                                : "fas fa-close"
-                                        }
-                                        onClick={() =>
-                                            setAddMonthltTask(!addMonthltTask)
-                                        }
-                                    ></i>
-
-                                </form>
-
-                            </div>
-
-                        </div>
-
-                        <div>card2</div>
-                        <div>card3</div>
-                        {bgImages && (               
-                            <div className='bgContainer'
-                                style={{backgroundImage:`url(${background})`}}
-                            >
-                                
-                                
-                                    {
-                                    
-                                        bg.map((img, index)=>{
-                                            return(
-                                                <img 
-                                                src={img.image} 
-                                                alt="bg"
-                                                key={index}
-                                                width={200}
-                                                onClick={()=>{
-                                                    setBackground(img.image)
-                                                }}
-                                                />
-                                            )
-                                        })
-                                    
-                                }
-                               
-
-                            </div>
-                        )}
-
-                    </div>
-
-                    {
+                    <i
+                      className={
+                        !addMonthltTask ? "fas fa-plus" : "fas fa-close"
+                      }
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setAddMonthltTask(!addMonthltTask)}
+                    ></i>
+                  </form>
+                </div>
+              </div>
+              {bgConatiner && (
+                <div className="bgContainer">
+                  <div
+                    onClick={() => {
+                      localStorage.setItem("bg", JSON.stringify("https://4kwallpapers.com/images/wallpapers/dark-blue-circles-3840x2160-12670.jpg"));
+                      setBg("https://4kwallpapers.com/images/wallpapers/dark-blue-circles-3840x2160-12670.jpg");
+                    }}
+                  >
+                    <p>Default</p>
+                  </div>
+                  {images.map((url, index) => {
+                    return (
+                      <img
+                        src={url.url}
+                        alt={url.url}
+                        key={index}
+                        width={200}
+                        onClick={() => handleSetBg(url.url)}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+              {
                         loader && (
                         <div className='loader'>
                             <div></div>
@@ -283,18 +259,18 @@ const MainLayout = () => {
                             <div></div>
                             <div></div>
                             <div
-                                style={{position:'absolute', color:'#fff',fontSize:'10px'}}
+                                style={{color:'#fff', fontSize:'10px'}}
                             >loading</div>
                         </div>
                         )
-                    }
-                </div>
+              }
 
-                <Footer />
+          </div>
 
-            </div>
-        </>
-    )
+          <Footer />
+        </div>
+      </>
+    );
 }
 
 export default MainLayout
