@@ -860,7 +860,7 @@ input:focus{
     width: 100%;
 
     height: auto;
-    max-height: 350px;
+    height: 300px;
 
     padding: 12px 5px;
 
