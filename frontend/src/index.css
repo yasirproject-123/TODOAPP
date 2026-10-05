@@ -1006,12 +1006,12 @@ input:focus{
   /* ---------- Monthly Input ---------- */
 
   .monthlyTaskInput {
-    max-width: 100%;
+    width: 100%;
   }
 
   .monthlyTaskInput div {
-    flex-direction: column;
-
+    flex-direction: row;
+    padding-bottom: 10px;
     gap: 5px;
   }
 
