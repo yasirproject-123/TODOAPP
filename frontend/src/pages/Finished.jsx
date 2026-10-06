@@ -7,6 +7,7 @@ const Finished = () => {
   const API = "https://todoapp-backend-4yfx.onrender.com"
 
   const [todos, setTodos] = useState([])
+  const [searchWord, setSearchWord] = useState('')
 
 
   const getTodos = () => {
