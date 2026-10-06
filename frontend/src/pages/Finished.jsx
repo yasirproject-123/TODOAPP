@@ -41,6 +41,7 @@ const Finished = () => {
   }, [])
 
   const finishedTodos = todos.filter(todo => todo.status === "done" || todo.lastCompleted !== null)
+  const search = finishedTodos.filter(todo => todo.todo.toLowerCase().includes(searchWord.toLocaleLowerCase()))
 
   return (
     <div>
@@ -49,7 +50,7 @@ const Finished = () => {
       </div>
       <div className='todo-list-wrapper'>
         {
-          finishedTodos.map((todo, index) => {
+          search.map((todo, index) => {
             return <div key={index} className='todo-wrapper'>
               <div className='todo'>
                 <div>{todo.todo}</div>
