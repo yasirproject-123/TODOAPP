@@ -8,6 +8,12 @@ const Pending = () => {
 
   const [todoPending, setTodoPending] = useState([])
 
+  const [selectedImage, setSelectedImage] = useState('')
+
+  const [imgId, setImgId] = useState('')
+
+  const [imageForm, setImageForm] = useState(false)
+
   const today = Date.now()
 
 
@@ -38,21 +44,42 @@ const Pending = () => {
 
   }
 
+  const imageHandler =(id)=> {
+    const formData = new FormData();
+
+    formData.append("image", selectedImage);
+
+    console.log(selectedImage);
+    
+
+    axios
+    .put(`${API}/upload-image/${id}`,formData)
+      .then((result) => {
+      console.log(result.data.message)
+
+      setSelectedImage(null)
+      setImgId(null)
+      setImageForm(false)
+
+      getTodos()
+    })
+      .catch((error) => {
+      console.log("UPLOAD ERROR:", error)
+      console.log(
+        "SERVER MESSAGE:",
+        error.response?.data?.message || error.message
+      )
+    })
+    
+  }
+
+
+
 
   useEffect(() => {
     getTodos()
   }, [])
 
-
-  // const filteredTodos = todoPending.filter((todo) => {
-  //   const dueDate = new Date(todo.specialDate);
-
-  //   const daysLeft = Math.ceil(
-  //     (dueDate - today) / (1000 * 60 * 60 * 24)
-  //   );
-
-  //   return daysLeft <= 0 && todo.status === 'pending';
-  // });
 
   return (
     <div>
@@ -71,6 +98,14 @@ const Pending = () => {
                     <i className='fas fa-arrow-right'></i>
                     <span>Finish</span>
                   </button>
+                  <button
+                    onClick={()=>{
+                      setImgId(todo.id)
+                      setImageForm(true)
+                    }}
+                  >
+                    <i className='fas fa-paperclip'></i>
+                  </button>
                 </div>
               </div>
             })
@@ -80,6 +115,35 @@ const Pending = () => {
         }
 
       </div>
+      {
+      imageForm && (
+        <div className='imageForm'> 
+        <input 
+          type="file" 
+          accept="image/*"
+          onChange={(e)=>setSelectedImage(e.target.files[0])}
+        />
+        
+        <div>
+          <button 
+          type='button'
+          onClick={()=>{
+            imageHandler(imgId)
+            
+          }}
+        >Add</button>
+
+        <button 
+          type='button'
+          onClick={()=>{
+            setImageForm(false)
+          }}
+        >close</button>
+        </div>
+      </div>
+      )
+    }
+
     </div>
   )
 
