@@ -81,7 +81,7 @@ const imageHandler = (id) => {
         getTodos();
       })
       .catch((error) => {
-        console.log("UPLOAD ERROR:", error);
+        // console.log("UPLOAD ERROR:", error);
         // console.log(
         //   "SERVER MESSAGE:",
         //   error.response?.data?.message || error.message,
@@ -144,7 +144,7 @@ const imageHandler = (id) => {
                     <div>
                       <label className="image-upload">
                         <i className="fas fa-folder-open" style={{color:'#0084ff'}}></i>
-                        <p>{!selectedImage ? 'select image': selectedImage.name
+                        <p>{!selectedImage ? 'Select image': selectedImage.name
                         }</p>
 
                         <input
@@ -167,11 +167,10 @@ const imageHandler = (id) => {
                           onClick={() => setImageFrame(true)}
                         />
                       ):
-                        <img 
-                          src="https://img.icons8.com/m_rounded/1200/no-image.jpg" 
-                          alt="No file"
-                          
-                        />
+                        <label className="image-upload">
+                            <i className="fas fa-image" style={{color:'#0084ff'}}></i>
+                        <p style={{fontFamily:'calibri'}}>No image</p>
+                        </label>
                       }
                       <button
                         onClick={() => {
