@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 import db from "./db.js";
@@ -232,63 +233,6 @@ app.delete("/deleteTodo/:id", async (req, res) => {
   }
 });
 
-//image uploader
-
-const upload = multer({
-  storage: multer.memoryStorage(),
-});
-
-app.put("/upload-image/:id", upload.single("image"), async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    if (!req.file) {
-      return res.status(400).json({
-        message: "No image selected",
-      });
-    }
-
-    // Upload image to Cloudinary
-    const result = await new Promise((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        {
-          folder: "todo-images",
-        },
-        (error, result) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(result);
-          }
-        }
-      );
-
-      stream.end(req.file.buffer);
-    });
-
-    // Get Cloudinary URL
-    const imageUrl = result.secure_url;
-
-    // Save ONLY the image URL to the existing todo
-    await db.query(
-      "UPDATE todolist SET image_url = ? WHERE id = ?",
-      [imageUrl, id]
-    );
-
-    res.json({
-      message: "Image uploaded successfully",
-      image_url: imageUrl,
-    });
-
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      message: "Image upload failed",
-      error: error.message,
-    });
-  }
-});
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`server running at http://localhost:${PORT}`);
