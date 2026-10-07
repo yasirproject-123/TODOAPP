@@ -141,6 +141,7 @@ a{
   padding: 15px 0;
   align-items: center;
   gap: 10px;
+  
 }
 
 .todo-wrapper{
@@ -168,29 +169,6 @@ a{
   color: #ffffff;
   text-shadow: 2px 1px 1px #000000;
  
-}
-
-.todo-wrapper::before {
-  position: absolute;
-  content: '';
-  width: 20px;
-  height: 100%;
-  left: -40px;
-
-  background: linear-gradient(
-    180deg,
-    #ffffff05,
-    #ffffff10
-  );
-
-  clip-path: polygon(
-    30% 0,
-    100% 0,
-    70% 100%,
-    0 100%
-  );
-
-  animation: movingGlass 5s ease-in-out infinite;
 }
 
 @keyframes movingGlass {

@@ -293,6 +293,78 @@ app.put("/upload-image/:id", upload.single("image"), async (req, res) => {
   }
 });
 
+app.delete("/delete-image/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Get image URL from database
+    const [rows] = await db.query(
+      "SELECT image_url FROM todolist WHERE id = ?",
+      [id]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({
+        message: "Todo not found",
+      });
+    }
+
+    const imageUrl = rows[0].image_url;
+
+    if (!imageUrl) {
+      return res.status(404).json({
+        message: "No image attached to this todo",
+      });
+    }
+
+    // Extract Cloudinary public_id
+    const urlParts = imageUrl.split("/");
+
+    const uploadIndex = urlParts.indexOf("upload");
+
+    if (uploadIndex === -1) {
+      return res.status(400).json({
+        message: "Invalid Cloudinary URL",
+      });
+    }
+
+    // Everything after /upload/vXXXXXXXX/
+    let publicIdParts = urlParts.slice(uploadIndex + 2);
+
+    // Remove file extension
+    let publicId = publicIdParts.join("/");
+
+    publicId = publicId.substring(
+      0,
+      publicId.lastIndexOf(".")
+    );
+
+    // Delete image from Cloudinary
+    const result = await cloudinary.uploader.destroy(publicId);
+
+    console.log("Cloudinary delete:", result);
+
+    // Remove URL from MySQL
+    await db.query(
+      "UPDATE todolist SET image_url = NULL WHERE id = ?",
+      [id]
+    );
+
+    res.json({
+      message: "Image deleted successfully",
+    });
+
+  } catch (error) {
+    console.error("IMAGE DELETE ERROR:", error);
+
+    res.status(500).json({
+      message: "Image deletion failed",
+      error: error.message,
+    });
+  }
+});
+
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`server running at http://localhost:${PORT}`);
 });

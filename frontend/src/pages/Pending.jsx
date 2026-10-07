@@ -74,6 +74,22 @@ const Pending = () => {
       });
   };
 
+  const deleteImage =(id)=> {
+    axios
+      .delete(`${API}/delete-image/${id}`)
+      .then((result)=>{
+        console.log(result.data.message);
+        getTodos();
+      })
+      .catch((error) => {
+        console.log("UPLOAD ERROR:", error);
+        console.log(
+          "SERVER MESSAGE:",
+          error.response?.data?.message || error.message,
+        );
+      });
+  } 
+
   useEffect(() => {
     getTodos();
   }, []);
@@ -149,9 +165,7 @@ const Pending = () => {
                       />
                       <button
                         onClick={() => {
-                          imageFrame === false
-                            ? setImageFrame(true)
-                            : setImageFrame(false);
+                          deleteImage(imgId)
                         }}
                       >
                         Remove
