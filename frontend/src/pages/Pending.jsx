@@ -69,9 +69,6 @@ const imageHandler = (id) => {
 };
   const deleteImage =(id)=> {
 
-    console.log(id);
-    
-
     axios
       .delete(`${API}/delete-image/${id}`)
       .then((result)=>{
@@ -85,10 +82,10 @@ const imageHandler = (id) => {
       })
       .catch((error) => {
         console.log("UPLOAD ERROR:", error);
-        console.log(
-          "SERVER MESSAGE:",
-          error.response?.data?.message || error.message,
-        );
+        // console.log(
+        //   "SERVER MESSAGE:",
+        //   error.response?.data?.message || error.message,
+        // );
         alert(error.response.data.message + "" + error.response.data.code)
       });
   } 
