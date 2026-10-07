@@ -87,6 +87,7 @@ body,
 }
 
 .todo-list-wrapper button{
+  
   display: flex;
   flex-direction: column;
   border: none;
@@ -132,6 +133,7 @@ a{
 }
 
 .todo-list-wrapper{
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 70vh;
@@ -165,7 +167,7 @@ a{
 
   color: #ffffff;
   text-shadow: 2px 1px 1px #000000;
-  overflow: hidden;
+ 
 }
 
 .todo-wrapper::before {
@@ -1160,33 +1162,84 @@ input:focus{
 
 }
 
-.imageForm{
+
+.todo-wrapper:has(.attachments) {
+  z-index: 9999;
+}
+
+.attachments{
   position: absolute;
-  background: #02134100;
-  width: 50%;
-  height: 100%;
-  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #858080;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 5px;
+  gap: 10px;
+}
+
+.attachments div{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  backdrop-filter: blur(5px);
+  margin-bottom: 5px;
+  width: 50%;
 }
 
-.imageForm input{
+.attachments div input{
   width: 100%;
-  height: 30px;
-  font-size: 12px;
-  margin-bottom: 15px;
+  height: 100px;
+  background: #000dff00;
+  box-shadow: none;
+  border: 1px solid;
 }
 
-.imageForm div{
+.attachments div img{
   width: 100%;
-  text-align: center;
+  height: 100px;
+  border-radius: 8px;
 }
 
-.imageForm button{
-  width: 30%;
-  margin-right: 5px;
+.attachments div button{
+  width: 50%;
+  margin-top: 5px;
+  background: #fcfcfc;
+  color: #000000;
+  border-radius: 8px;
+}
+
+.image-upload {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
+  height: 100px;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+  border: 1px solid #ffffff25;
+
+  color: #919191;
+
+  cursor: pointer;
+  text-shadow: 0 0 0;
+ 
+}
+
+
+
+.image-upload input {
+  display: none;
 }
