@@ -245,21 +245,13 @@ app.put("/upload-image/:id", upload.single("image"), async (req, res) => {
   try {
     const { id } = req.params;
 
-    console.log("UPLOAD START");
-    console.log("Todo ID:", id);
-    console.log(
-      "File:",
-      req.file ? req.file.originalname : "NO FILE"
-    );
-
     if (!req.file) {
       return res.status(400).json({
         message: "No image selected",
       });
     }
 
-    console.log("Uploading to Cloudinary...");
-
+    // Upload image to Cloudinary
     const result = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         {
@@ -277,19 +269,14 @@ app.put("/upload-image/:id", upload.single("image"), async (req, res) => {
       stream.end(req.file.buffer);
     });
 
-    console.log("Cloudinary upload successful");
-    console.log("Image URL:", result.secure_url);
-
+    // Get Cloudinary URL
     const imageUrl = result.secure_url;
 
-    console.log("Saving image URL to MySQL...");
-
+    // Save ONLY the image URL to the existing todo
     await db.query(
       "UPDATE todolist SET image_url = ? WHERE id = ?",
       [imageUrl, id]
     );
-
-    console.log("MySQL update successful");
 
     res.json({
       message: "Image uploaded successfully",
@@ -297,11 +284,7 @@ app.put("/upload-image/:id", upload.single("image"), async (req, res) => {
     });
 
   } catch (error) {
-    console.error("================================");
-    console.error("IMAGE UPLOAD ERROR:");
     console.error(error);
-    console.error("ERROR MESSAGE:", error.message);
-    console.error("================================");
 
     res.status(500).json({
       message: "Image upload failed",
@@ -309,58 +292,6 @@ app.put("/upload-image/:id", upload.single("image"), async (req, res) => {
     });
   }
 });
-
-// app.put("/upload-image/:id", upload.single("image"), async (req, res) => {
-//   try {
-//     const { id } = req.params;
-
-//     if (!req.file) {
-//       return res.status(400).json({
-//         message: "No image selected",
-//       });
-//     }
-
-//     // Upload image to Cloudinary
-//     const result = await new Promise((resolve, reject) => {
-//       const stream = cloudinary.uploader.upload_stream(
-//         {
-//           folder: "todo-images",
-//         },
-//         (error, result) => {
-//           if (error) {
-//             reject(error);
-//           } else {
-//             resolve(result);
-//           }
-//         }
-//       );
-
-//       stream.end(req.file.buffer);
-//     });
-
-//     // Get Cloudinary URL
-//     const imageUrl = result.secure_url;
-
-//     // Save ONLY the image URL to the existing todo
-//     await db.query(
-//       "UPDATE todolist SET image_url = ? WHERE id = ?",
-//       [imageUrl, id]
-//     );
-
-//     res.json({
-//       message: "Image uploaded successfully",
-//       image_url: imageUrl,
-//     });
-
-//   } catch (error) {
-//     console.error(error);
-
-//     res.status(500).json({
-//       message: "Image upload failed",
-//       error: error.message,
-//     });
-//   }
-// });
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`server running at http://localhost:${PORT}`);
