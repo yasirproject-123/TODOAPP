@@ -1159,6 +1159,7 @@ input:focus{
   overflow: hidden;
   padding: 5px;
   gap: 10px;
+  animation: attachments .5s ;
 }
 
 .attachments div{
@@ -1220,4 +1221,15 @@ input:focus{
 
 .image-upload input {
   display: none;
+}
+
+@keyframes attachments {
+  0%{
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100%{
+    opacity: 1;
+  }
 }
