@@ -9,15 +9,10 @@ const Pending = () => {
 
   const [selectedImage, setSelectedImage] = useState("");
 
-  const [imageForm, setImageForm] = useState(false);
-
-  const [imageFrame, setImageFrame] = useState(false);
-
-  const [imageUrl, setImageUrl] = useState(null);
-  const [imgId, setImgId] = useState(null);
+  const [attachmentsBg, setAttachmentsBg] = useState(null);
   const [attachmentId, setAttachmentId] = useState(null);
 
-  const today = Date.now();
+
 
   const getTodos = () => {
     axios
@@ -56,7 +51,6 @@ const imageHandler = (id) => {
       console.log(result.data.message);
 
       setSelectedImage("");
-
       getTodos();
     })
     .catch((error) => {
@@ -75,9 +69,6 @@ const imageHandler = (id) => {
         console.log(result.data.message);
         alert(result.data.message);
 
-        setImageUrl(null);
-        setImgId(null)
-
         getTodos();
       })
       .catch((error) => {
@@ -88,10 +79,13 @@ const imageHandler = (id) => {
         // );
         alert(error.response.data.message + "" + error.response.data.code)
       });
-  } 
+  }
+
 
   useEffect(() => {
     getTodos();
+    const savedBg = localStorage.getItem("bg");
+    setAttachmentsBg(JSON.parse(savedBg))
   }, []);
 
   return (
@@ -122,8 +116,6 @@ const imageHandler = (id) => {
                   <button
                     style={{ height: "fit-content" }}
                     onClick={() => {
-                      setImgId(todo.id);
-                      setImageUrl(todo.image_url);
                       setAttachmentId(
                         attachmentId === todo.id ? null : todo.id,
                       );
@@ -140,7 +132,10 @@ const imageHandler = (id) => {
                 </div>
 
                 {attachmentId === todo.id && (
-                  <div className="attachments">
+                  <div 
+                    className="attachments"
+                  
+                  >
                     <div>
                       <label className="image-upload">
                         <i className="fas fa-folder-open" style={{color:'#0084ff'}}></i>
@@ -164,7 +159,6 @@ const imageHandler = (id) => {
                         <img
                           src={todo.image_url}
                           alt="attachment"
-                          onClick={() => setImageFrame(true)}
                         />
                       ):
                         <label className="image-upload">
