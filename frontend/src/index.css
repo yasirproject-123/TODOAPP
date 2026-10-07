@@ -1160,3 +1160,33 @@ input:focus{
 
 }
 
+.imageForm{
+  position: absolute;
+  background: #02134100;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.imageForm input{
+  width: 100%;
+  height: 30px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.imageForm div{
+  width: 100%;
+  text-align: center;
+}
+
+.imageForm button{
+  width: 30%;
+  margin-right: 5px;
+}
