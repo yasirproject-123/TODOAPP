@@ -314,6 +314,7 @@ app.delete("/delete-image/:id", async (req, res) => {
     if (!imageUrl) {
       return res.status(404).json({
         message: "No image attached to this todo",
+        code:"404"
       });
     }
 

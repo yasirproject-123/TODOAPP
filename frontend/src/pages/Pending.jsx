@@ -42,43 +42,45 @@ const Pending = () => {
       });
   };
 
-  const imageHandler = (id) => {
+const imageHandler = (id) => {
+  if (!selectedImage) {
+    return alert("Select a File");
+  }
 
-    if(!selectedImage){
-      return alert("Select a File")
-    }
+  const formData = new FormData();
+  formData.append("image", selectedImage);
 
-    const formData = new FormData();
+  axios
+    .put(`${API}/upload-image/${id}`, formData)
+    .then((result) => {
+      console.log(result.data.message);
 
-    formData.append("image", selectedImage);
+      setSelectedImage("");
 
-    console.log(selectedImage);
-
-    axios
-      .put(`${API}/upload-image/${id}`, formData)
-      .then((result) => {
-        console.log(result.data.message);
-
-        setSelectedImage(null);
-
-        setImageForm(false);
-
-        getTodos();
-      })
-      .catch((error) => {
-        console.log("UPLOAD ERROR:", error);
-        console.log(
-          "SERVER MESSAGE:",
-          error.response?.data?.message || error.message,
-        );
-      });
-  };
-
+      getTodos();
+    })
+    .catch((error) => {
+      console.log("UPLOAD ERROR:", error);
+      console.log(
+        "SERVER MESSAGE:",
+        error.response?.data?.message || error.message
+      );
+    });
+};
   const deleteImage =(id)=> {
+
+    console.log(id);
+    
+
     axios
       .delete(`${API}/delete-image/${id}`)
       .then((result)=>{
         console.log(result.data.message);
+        alert(result.data.message);
+
+        setImageUrl(null);
+        setImgId(null)
+
         getTodos();
       })
       .catch((error) => {
@@ -87,6 +89,7 @@ const Pending = () => {
           "SERVER MESSAGE:",
           error.response?.data?.message || error.message,
         );
+        alert(error.response.data.message + "" + error.response.data.code)
       });
   } 
 
@@ -144,13 +147,15 @@ const Pending = () => {
                     <div>
                       <label className="image-upload">
                         <i className="fas fa-folder-open" style={{color:'#0084ff'}}></i>
-                        <p>Select Image</p>
+                        <p>{!selectedImage ? 'select image': selectedImage.name
+                        }</p>
 
                         <input
                           type="file"
                           accept="image/*"
                           onChange={(e) => {
                             setSelectedImage(e.target.files[0]);
+                            
                           }}
                         />
                       </label>
@@ -158,14 +163,23 @@ const Pending = () => {
                     </div>
 
                     <div>
-                      <img
-                        src={imageUrl}
-                        alt={imageUrl}
-                        onClick={() => setImageFrame(false)}
-                      />
+                      {todo.image_url ?(
+                        <img
+                          src={todo.image_url}
+                          alt="attachment"
+                          onClick={() => setImageFrame(true)}
+                        />
+                      ):
+                        <img 
+                          src="https://img.icons8.com/m_rounded/1200/no-image.jpg" 
+                          alt="No file"
+                          
+                        />
+                      }
                       <button
                         onClick={() => {
-                          deleteImage(imgId)
+                          deleteImage(todo.id);
+                          
                         }}
                       >
                         Remove
