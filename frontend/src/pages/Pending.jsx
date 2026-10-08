@@ -114,7 +114,6 @@ const imageHandler = (id) => {
                     <span>Finish</span>
                   </button>
                   <button
-                    style={{ height: "fit-content" }}
                     onClick={() => {
                       setAttachmentId(
                         attachmentId === todo.id ? null : todo.id,
@@ -123,10 +122,6 @@ const imageHandler = (id) => {
                   >
                     <i
                       className="fas fa-paperclip"
-                      style={{
-                        color: "#00d9ff",
-                        textShadow: "1px 1px 0 #383838",
-                      }}
                     ></i>
                   </button>
                 </div>

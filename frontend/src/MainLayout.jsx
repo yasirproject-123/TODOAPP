@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Outlet } from "react-router-dom"
 import Header from "./components/Header"
-import Footer from './components/Footer'
 import axios from 'axios'
 import images from './script'
 
@@ -95,11 +94,21 @@ const MainLayout = () => {
     }
 
     return (
-      <>
-        <div className="mainLayout">
+      <div>
+        <div className="mainLayout"
+        style={{
+            backgroundImage:`url(${bg})`,
+            backgroundPosition:'center',
+            backgroundRepeat:'no-repeat',
+            backgroundSize:'cover'
+          
+          }}
+        >
           <Header />
 
-          <div className="contents" style={{ backgroundImage: `url(${bg})` }}>
+          <div className="contents" 
+          
+          >
             <div className="todoList">
               <Outlet />
             </div>
@@ -232,8 +241,8 @@ const MainLayout = () => {
                 <div className="bgContainer">
                   <div
                     onClick={() => {
-                      localStorage.setItem("bg", JSON.stringify("https://4kwallpapers.com/images/wallpapers/dark-blue-circles-3840x2160-12670.jpg"));
-                      setBg("https://4kwallpapers.com/images/wallpapers/dark-blue-circles-3840x2160-12670.jpg");
+                      localStorage.removeItem("bg")
+                      setBg("");
                     }}
                   >
                     <p>Default</p>
@@ -267,10 +276,8 @@ const MainLayout = () => {
               }
 
           </div>
-
-          <Footer />
         </div>
-      </>
+      </div>
     );
 }
 

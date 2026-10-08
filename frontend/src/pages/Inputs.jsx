@@ -31,7 +31,7 @@ const Inputs = ({ onTodoAdded }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='dailyForm'>
 
       <div className='input'>
         <input
@@ -48,10 +48,8 @@ const Inputs = ({ onTodoAdded }) => {
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
-
-
-        <button type='submit'>Add</button>
       </div>
+        <button type='submit'>Add</button>
     </form>
   )
 }
