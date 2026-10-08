@@ -1806,27 +1806,16 @@ input {
 
 @media (max-width: 430px) {
 
-  .mainLayout{
-    overflow: auto;
-    height: 100%;
-  }
-
   .contents{
-    overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100%;
   }
 
-  .todo-list {
-    width: calc(100% - 36px);
-    height: 300px;
-    margin: 0 18px 18px;
-    padding: 2px 7px 20px 2px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
+  .todo-list-wrapper{
+    max-height: 300px;
+  }
 
-.todo-list-wrapper{
-  height: 350px;
-}
 
     .todoList {
 
@@ -1835,10 +1824,26 @@ input {
 
 
     .cards {
-
+        height: 400px;
         padding: 6px;
+        overflow: hidden;
     }
 
+    .card {
+        overflow: auto;
+        padding: 15px;
+        height: 300px;
+        border-radius: 17px;
+    }
+
+    .monthlyTask {
+
+        font-size: 12px;
+        height: 80%;
+        padding: 6px 9px;
+        overflow: auto;
+        margin-bottom: 10px;
+    }
 
     .buttons {
 
@@ -1871,12 +1876,7 @@ input {
     }
 
 
-    .card {
 
-        padding: 15px;
-
-        border-radius: 17px;
-    }
 
 
     .card > p {
@@ -1885,11 +1885,14 @@ input {
     }
 
 
+    
+
     .monthlyTaskTodo {
 
         font-size: 12px;
 
         padding: 6px 9px;
+        
     }
 
 
