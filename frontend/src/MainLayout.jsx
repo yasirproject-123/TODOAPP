@@ -243,6 +243,7 @@ const MainLayout = () => {
                     onClick={() => {
                       localStorage.removeItem("bg")
                       setBg("");
+                      setBgConatiner(false)
                     }}
                   >
                     <p>Default</p>
@@ -254,7 +255,10 @@ const MainLayout = () => {
                         alt={url.url}
                         key={index}
                         width={200}
-                        onClick={() => handleSetBg(url.url)}
+                        onClick={() => {
+                          handleSetBg(url.url)
+                          setBgConatiner(false)
+                        }}
                       />
                     );
                   })}
