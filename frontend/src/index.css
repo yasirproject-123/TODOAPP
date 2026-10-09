@@ -996,14 +996,9 @@ input {
     transition: 0.25s ease;
 }
 
-
-.fa-bars .bar1 {
-    transform: translateY(4px) rotate(25deg);
-}
-
-
-.fa-bars .bar2 {
-    transform: translateY(-4px) rotate(-25deg);
+.fa-bars span {
+    font-size: 12px;
+    height: fit-content;
 }
 
 
@@ -1013,9 +1008,9 @@ input {
 }
 
 
-.fa-bars.active .bar {
+.fa-bars.active i {
 
-    background: #ef5555;
+    color: #ef5555;
 }
 
 
@@ -1688,6 +1683,8 @@ input {
         min-width: 65px;
 
         flex-shrink: 0;
+
+        font-weight: 800;
     }
 
 
@@ -2011,6 +2008,16 @@ input {
     .todo-wrapper {
 
         gap: 7px;
+        
+    }
+
+    .attachments{
+        position: absolute;
+        z-index: 99999;
+        top: 100%;
+        left: 0;
+        display: flex;
+        flex-direction: row;
     }
 
 

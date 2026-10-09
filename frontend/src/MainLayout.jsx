@@ -148,9 +148,11 @@ const MainLayout = () => {
                 <div
                   className={`fa-bars ${bgConatiner ? "active" : ""}`}
                   onClick={() => setBgConatiner(!bgConatiner)}
+                  title='Background'
                 >
-                  <div className="bar bar1"></div>
-                  <div className="bar bar2"></div>
+                  <i className="fas fa-bars"></i>
+                  <span>Bg</span>
+                  
                 </div>
 
               </div>
