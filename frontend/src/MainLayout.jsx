@@ -150,7 +150,7 @@ const MainLayout = () => {
                   onClick={() => setBgConatiner(!bgConatiner)}
                   title='Background'
                 >
-                  <i className="fas fa-bars"></i>
+                  <i className="fas"></i>
                   <span>Bg</span>
                   
                 </div>

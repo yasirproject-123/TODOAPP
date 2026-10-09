@@ -51,8 +51,8 @@ const TotoPending = () => {
 
     return (
         <div>
-            <div className='input'>
-                <h3>Up Comings </h3>
+            <div className='dailyForm'>
+                <h3 className='input'>Up Comings </h3>
             </div>
 
             <div className='todo-list-wrapper'>

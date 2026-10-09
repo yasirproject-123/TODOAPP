@@ -46,14 +46,17 @@ const Finished = () => {
 
   return (
     <div>
-      <div className='input'>
-        <h3>Completed</h3>
-        <input 
-          type="search" 
-          placeholder='Search'
-          value={searchWord}
-          onChange={(e)=>setSearchWord(e.target.value)}
-        />
+      <div className='dailyForm'>
+        <div className='input'>
+
+          <h3>Completed</h3>
+          <input 
+            type="search" 
+            placeholder='Search'
+            value={searchWord}
+            onChange={(e)=>setSearchWord(e.target.value)}
+            />
+            </div>
       </div>
       <div className='todo-list-wrapper'>
         {

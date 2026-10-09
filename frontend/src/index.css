@@ -523,6 +523,15 @@ input {
 }
 
 
+.buttons i{
+    color: #757373;
+}
+
+.buttons:nth-child(1) span{
+    color: #757373;
+}
+
+
 /* Finish / Restore */
 
 .todo-wrapper button:first-child {
@@ -1895,6 +1904,10 @@ input {
     gap: 5px;
   }
 
+  .input h3{
+    text-align: center;
+  }
+
   .input input:nth-child(1){
     width: 100%;
     margin: 0;
@@ -1952,6 +1965,7 @@ input {
 
         min-width: 58px;
     }
+
 
 
     .buttons > a {
@@ -2046,5 +2060,7 @@ input {
             display: none;
             
         }
+
+        
 }
 }
