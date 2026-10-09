@@ -222,6 +222,11 @@ const MainLayout = () => {
                           required
                           onChange={(e) => setDate(e.target.value)}
                         />
+
+                        <button
+                          type='submit'
+                          onClick={()=>handleSubmit}
+                        >Add</button>
                       </div>
                     )}
 

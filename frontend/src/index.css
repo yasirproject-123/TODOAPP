@@ -24,22 +24,22 @@ body,
     overflow: hidden;
 }
 
-#root::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 6px;
 }
 
-#root::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
     background: transparent;
 }
 
-#root::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
 
     background: rgba(148, 163, 184, 0.55);
 
     border-radius: 20px;
 }
 
-#root::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
 
     background: rgba(100, 116, 139, 0.7);
 }
@@ -1966,7 +1966,22 @@ input {
         font-size: 15px;
     }
 
+    .monthlyTaskInput button{
+        color: white !important;
+        background: linear-gradient(135deg, #5f56e9, #4940d5);
+        box-shadow: 0 8px 18px rgba(79, 70, 229, 0.23);
+        border: none;
+        padding: 5px;
+        height: 40px;
+        width: 100%;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: .2s;
+    }
 
+    .monthlyTaskInput button:hover{
+        transform: translateY(-2px);
+    }
 
 
 
@@ -1983,6 +1998,10 @@ input {
         font-size: 12px;
 
         padding: 6px 9px;
+
+        padding-left: 30px;
+
+        width: 100%;
         
     }
 
