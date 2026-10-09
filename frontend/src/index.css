@@ -2035,5 +2035,16 @@ input {
     #root {
     overflow: auto;
 
+
+    .header div{
+            
+            align-items: center;
+            gap: 5px;
+        }
+    
+        .header p{
+            display: none;
+            
+        }
 }
 }
