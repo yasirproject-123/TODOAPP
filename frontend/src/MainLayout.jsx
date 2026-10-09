@@ -150,8 +150,13 @@ const MainLayout = () => {
                   onClick={() => setBgConatiner(!bgConatiner)}
                   title='Background'
                 >
-                  <i className="fas"></i>
-                  <span>Bg</span>
+                  <i 
+                  className="fas"
+                  style={{color:'#757373'}}
+                  ></i>
+                  <span
+                    style={{color:'#757373'}}
+                  >Bg</span>
                   
                 </div>
 
