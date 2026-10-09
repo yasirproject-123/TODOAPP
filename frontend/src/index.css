@@ -1196,10 +1196,11 @@ input {
 
 .monthlyTask-todo-pending::after{
     position: absolute;
-    content: '✓';
+    content: '✕';
     color:#fa3333;
     top: 10px;
     left: 10px;
+    font-size: 12px;
     border-radius: 50%;
 }
 
@@ -1935,6 +1936,7 @@ input {
         overflow: auto;
         margin-bottom: 10px;
     }
+
 
     .buttons {
 
