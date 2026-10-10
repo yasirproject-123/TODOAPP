@@ -137,7 +137,7 @@ app.post("/login", async (req, res) => {
       secure: true,
       sameSite: "none",
       maxAge: 60 * 60 * 1000,
-      path: "/",
+      path: "/"
     });
 
     return res.status(200).json({
