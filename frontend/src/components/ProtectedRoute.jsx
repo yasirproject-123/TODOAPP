@@ -15,7 +15,7 @@ const ProtectedRoute = () => {
       })
       .then((response) => {
         setAuthenticated(response.data.authenticated);
-        localStorage.setItem("user", JSON.stringify(response.data))
+        // localStorage.setItem("user", JSON.stringify(response.data))
       })
       .catch(() => {
         setAuthenticated(false);

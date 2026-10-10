@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 
@@ -8,7 +8,8 @@ const Header = () => {
   const API = "https://todoapp-backend-4yfx.onrender.com"
 
   const [todoPending, setTodoPending] = useState([])
-
+  const [shutter, setShutter] = useState(false)
+  const navigate = useNavigate()
 
   const getTodos = () => {
     axios
@@ -33,6 +34,21 @@ const Header = () => {
     }
   }, [])
 
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        `${API}/logout`,
+        {},
+        { withCredentials: true }
+      );
+
+      localStorage.removeItem('token');
+      navigate("/home")
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
   // const currentDateTodo = todoPending.filter(
   //   todo => todo.specialDate <= date && todo.status === "pending"
   // )
@@ -51,6 +67,19 @@ const Header = () => {
           ></i>
         </NavLink>
       </div>
+
+              <div className={`shutter ${shutter ? 'active' : ''}`}>
+                <button
+                  onClick={handleLogout}
+                >Log Out</button>
+                <i 
+                className={`fas fa-chevron-${!shutter?'down':'up'}`}
+                onClick={()=>{
+                  !shutter ? setShutter(true) : setShutter(false)
+                }}
+                ></i>
+              </div>
+
     </div>
   )
 }

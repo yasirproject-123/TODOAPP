@@ -154,6 +154,19 @@ app.post("/login", async (req, res) => {
   }
 })
 
+app.post('/logout', (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    path: '/',
+  });
+
+  res.status(200).json({
+    message: 'Logged out successfully',
+  });
+});
+
 app.get("/todos", async (req, res) => {
 
   try {
