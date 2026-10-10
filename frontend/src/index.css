@@ -2161,4 +2161,13 @@ input {
 
         
 }
+
+.home{
+    width: 90%;
+}
+
+.home form{
+    width: 90%;
+}
+
 }
