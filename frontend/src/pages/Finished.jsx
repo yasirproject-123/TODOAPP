@@ -5,6 +5,7 @@ import axios from 'axios'
 const Finished = () => {
 
   const API = "https://todoapp-backend-4yfx.onrender.com"
+  // const API = "http://localhost:3000"
 
   const [todos, setTodos] = useState([])
   const [searchWord, setSearchWord] = useState('')
@@ -12,7 +13,7 @@ const Finished = () => {
 
   const getTodos = () => {
     axios
-      .get(`${API}/todos`)
+      .get(`${API}/todos`,{withCredentials:true})
       .then(result => {
         setTodos(result.data.todos)
         window.dispatchEvent(new Event('todoUpdated'))

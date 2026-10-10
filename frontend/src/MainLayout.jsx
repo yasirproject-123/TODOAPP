@@ -7,6 +7,7 @@ import images from './script'
 const MainLayout = () => {
 
     const API = "https://todoapp-backend-4yfx.onrender.com"
+    // const API = "http://localhost:3000"
 
     const [loader, setLoader] = useState(true)
 
@@ -27,7 +28,7 @@ const MainLayout = () => {
         setLoader(true)
         
         axios
-            .get(`${API}/todos`)
+            .get(`${API}/todos`, {withCredentials:true})
             .then(result => {
                 setTodos(result.data.todos)
                 // window.dispatchEvent(new Event('todoUpdated'))
@@ -68,7 +69,9 @@ const MainLayout = () => {
                 todo,
                 type: "monthly",
                 specialDate: date || null
-            })
+            },
+            {withCredentials:true}
+        )
 
             .then(result => {
 

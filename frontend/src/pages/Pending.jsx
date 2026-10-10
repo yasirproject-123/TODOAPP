@@ -4,6 +4,7 @@ import axios from "axios";
 
 const Pending = () => {
   const API = "https://todoapp-backend-4yfx.onrender.com";
+  // const API = "http://localhost:3000"
 
   const [todoPending, setTodoPending] = useState([]);
 
@@ -16,7 +17,7 @@ const Pending = () => {
 
   const getTodos = () => {
     axios
-      .get(`${API}/todos/today`)
+      .get(`${API}/todos/today`,{withCredentials:true})
       .then((result) => {
         setTodoPending(result.data.todos);
         window.dispatchEvent(new Event("todoUpdated"));

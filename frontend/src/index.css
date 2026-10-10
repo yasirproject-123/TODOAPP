@@ -91,6 +91,9 @@ input {
     display: flex;
     flex-direction: column;
 
+    /* justify-content: center;
+    align-items: center; */
+
     background: #edf2f7;
 
     color: #26364d;
@@ -1607,6 +1610,10 @@ input {
     to {
         transform: rotate(360deg);
     }
+}
+
+.home{
+    margin: auto;
 }
 
 
