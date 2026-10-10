@@ -12,7 +12,7 @@ const Header = () => {
 
   const getTodos = () => {
     axios
-      .get(`${API}/todos/today`)
+      .get(`${API}/todos/today`,{withCredentials:true})
       .then(result => {
         setTodoPending(result.data.todos)
 
