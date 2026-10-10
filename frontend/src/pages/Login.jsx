@@ -35,24 +35,45 @@ const Login = () => {
 
   return (
     <div className='home'>
-      <form onSubmit={handleSubmit}>
+      <form 
+        onSubmit={handleSubmit}
+      >
+        <h5>Login</h5>
+
+        <div className='loginInput'>
+
         <input 
           type="text" 
           required
+          placeholder='Email'
           value={email}
           onChange={(e)=>setEmail(e.target.value)}
-        />
+          />
         <input 
           type="password" 
           value={password}
           required
+          placeholder='Password'
           onChange={(e)=>setPassword(e.target.value)}
-        />
+          />
 
-        <button type='submit'>Login</button>
+          <div 
+          style={{
+            display:'flex', 
+            flexDirection:'row', 
+            gap:'8px',
+            }}>
+            <button type='submit'>Login</button>
+
+            <button type='button'>
+              <NavLink to={"/home/register"}>Register</NavLink>
+            </button>
+          </div>
+
+          </div>
       </form>
 
-      <NavLink to={"/home/register"}>Register</NavLink>
+      
       
     </div>
   )

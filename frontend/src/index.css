@@ -1613,7 +1613,107 @@ input {
 }
 
 .home{
+    align-items: center;
+    justify-content: center;
     margin: auto;
+    height: 70%;
+    display: flex;
+    width: 50%;
+    border-radius: 24px;
+    box-shadow: rgba(57, 74, 91, 0.12) 0px 20px 50px, rgba(255, 255, 255, 0.95) 0px 1px inset;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(246, 249, 252, 0.64));
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.95);
+}
+
+.home form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(65, 80, 96, 0.08) 0px 7px 22px;
+    background: rgba(255, 255, 255, 0.78);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    height: 80%;
+    width: 50%;
+}
+
+.home form .loginInput{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 80%;
+}
+
+.home form .loginInput input{
+    width: 100%;
+    color: rgb(51, 65, 85);
+    height: 40px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.95);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(220, 228, 237);
+    border-image: none;
+    border-radius: 10px;
+    outline: none;
+    padding: 0px 13px;
+    transition: 0.2s;
+}
+
+.home form button:nth-child(1){
+    cursor: pointer;
+    width: 30%;
+    height: 40px;
+    box-shadow: rgba(79, 70, 229, 0.23) 0px 8px 18px;
+    color: rgb(255, 255, 255) !important;
+    background: linear-gradient(135deg, rgb(95, 86, 233), rgb(73, 64, 213));
+    border-width: medium;
+    border-style: none;
+    border-color: currentcolor;
+    border-image: none;
+    border-radius: 8px;
+    padding: 5px;
+    transition: 0.2s;
+}
+
+.home form button:nth-child(2){
+     position: relative;
+    cursor: pointer;
+    width: 65%;
+    height: 40px;
+    box-shadow: rgba(79, 70, 229, 0.23) 0px 8px 18px;
+    color: #ffffff !important;
+    background: #797979;
+    border-width: medium;
+    border-style: none;
+    border-color: currentcolor;
+    border-image: none;
+    border-radius: 8px;
+    padding: 5px;
+    transition: 0.2s;
+}
+
+.home form a{
+   
+    width: 100%;
+    height: 100%;
+    color: rgb(255, 255, 255) !important;
+    
+}
+
+.home form a::before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    color: rgb(255, 255, 255) !important;
+    left: 0;
+    top: 0;
 }
 
 

@@ -32,23 +32,41 @@ const Register = () => {
   return (
     <div className='home'>
           <form onSubmit={handleSubmit}>
-            <input 
-              type="text" 
-              required
-              value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+        <h5>Register</h5>
+
+        <div className='loginInput'>
+
+          <input 
+            type="email" 
+            value={email}
+            required
+            placeholder='Email'
+            onChange={(e)=>setEmail(e.target.value)}
             />
-            <input 
-              type="password" 
-              value={password}
-              required
-              onChange={(e)=>setPassword(e.target.value)}
-            />
-    
+        <input 
+          type="password" 
+          required
+          placeholder='Password'
+          value={password}
+          onChange={(e)=>setPassword(e.target.value)}
+          />
+
+          <div 
+          style={{
+            display:'flex', 
+            flexDirection:'row', 
+            gap:'8px',
+            }}>
             <button type='submit'>Register</button>
+
+            <button type='button'>
+              <NavLink to={"/home/login"}>Login</NavLink>
+            </button>
+          </div>
+
+          </div>
           </form>
-    
-          <NavLink to={"/home/login"}>Login</NavLink>
+  
           
         </div>
   )
