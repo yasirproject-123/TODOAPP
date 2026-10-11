@@ -23,7 +23,17 @@ const ProtectedRoute = () => {
   }, []);
 
   if (authenticated === null) {
-    return <p>Checking authentication...</p>;
+    return <div className='loader'>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div
+                                style={{color:'#fff', fontSize:'10px'}}
+                            >loading</div>
+      <p>Checking authentication...</p>;
+                        </div>
+      
   }
 
   if (!authenticated) {
