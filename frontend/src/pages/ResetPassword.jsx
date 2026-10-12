@@ -29,6 +29,8 @@ const ResetPassword = () => {
                 {withCredentials:true}
             )
             .then((result)=>{
+                console.log(result.data.message);
+                
                 setMsg(result.data.message)
             })
             .catch((error)=>{})
