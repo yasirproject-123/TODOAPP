@@ -289,7 +289,7 @@ const MainLayout = () => {
                             <div></div>
                             <div
                                 style={{color:'#fff', fontSize:'10px'}}
-                            >loading</div>
+                            >Checking Authentication...</div>
                         </div>
                         )
               }
