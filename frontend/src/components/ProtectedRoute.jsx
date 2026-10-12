@@ -23,7 +23,15 @@ const ProtectedRoute = () => {
   }, []);
 
   if (authenticated === null) {
-    return <Navigate to={"/"}/>
+    return <div className='loader'>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div
+                                style={{color:'#fff', fontSize:'10px'}}
+                            >Checking authentication...</div>
+                        </div>
       
   }
 
