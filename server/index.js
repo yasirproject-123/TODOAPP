@@ -47,6 +47,8 @@ app.get("/auth/me", (req, res) => {
   }
 });
 
+//REGISTER
+
 app.post("/new-user", async(req, res) => {
   try {
 
@@ -86,6 +88,8 @@ app.post("/new-user", async(req, res) => {
     })
   }
 })
+
+//LOGIN
 
 app.post("/login", async (req, res) => {
   try {
@@ -154,6 +158,8 @@ app.post("/login", async (req, res) => {
   }
 })
 
+//LOGOUT
+
 app.post('/logout', (req, res) => {
   res.clearCookie('token', {
     httpOnly: true,
@@ -166,6 +172,66 @@ app.post('/logout', (req, res) => {
     message: 'Logged out successfully',
   });
 });
+
+//RESET PASSWORD
+
+app.post("/reset-password", async (req, res) => {
+  try {
+    const token = req.cookies?.token;
+    const {oldPassword, confirmNewPassword} = req.body;
+
+    if (!token) {
+      return res.status(401).json({
+        message: "Token not found"
+      });
+    }
+
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET
+    );
+
+    console.log(decoded);
+
+    const userId = decoded.id
+    const email = decoded.email
+
+    const [rows] = await db.query("SELECT * FROM users where id = ? && email = ?",[userId, email])
+
+    const user = rows[0]
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password)
+
+    if (!isMatch) {
+      return res.json({
+        message: "old password is not matching"
+      })
+    }
+    
+
+    if (oldPassword === confirmNewPassword) {
+        return res.status(401).json({
+          message:'Try new password from old one'
+        })
+    }
+
+    if (isMatch) {
+
+      const hashPassword = await bcrypt.hash(confirmNewPassword, 10)
+      await db.query("UPDATE users SET password = ? WHERE id = ? && email = ?",[hashPassword, userId, email])
+
+      return res.status(200).json({
+        message:'Password Changed'
+      });
+    }
+
+  } catch (error) {
+    return res.status(401).json({
+      message: "Invalid or expired token"
+    });
+  }
+});
+
 
 app.get("/todos", async (req, res) => {
 

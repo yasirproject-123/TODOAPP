@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -54,7 +54,7 @@ const Login = () => {
           value={password}
           required
           placeholder='Password'
-          onChange={(e)=>setPassword(e.target.value)}
+          onChange={(e)=>{setPassword(e.target.value)}}
           />
 
           <div 
@@ -69,8 +69,12 @@ const Login = () => {
               <NavLink to={"/home/register"}>Register</NavLink>
             </button>
           </div>
+           
+             <NavLink className="reset-link" to={"/home/reset-password"}>Reset Password</NavLink>
 
           </div>
+          
+          
       </form>
 
       

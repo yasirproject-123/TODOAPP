@@ -8,6 +8,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import HomeMsg from "./components/HomeMsg"
+import ResetPassword from "./pages/ResetPassword"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         {/* Protected route */}
 
         <Route element={<ProtectedRoute />}>
+          <Route path="reset-password" element={<ResetPassword />} />
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Pending />} />
             <Route path="/todo-finished" element={<Finished />} />
