@@ -29,11 +29,20 @@ const ResetPassword = () => {
                 {withCredentials:true}
             )
             .then((result)=>{
+                setMsgBox(true)
                 console.log(result.data.message);
-                
                 setMsg(result.data.message)
             })
-            .catch((error)=>{})
+            .catch((error)=>{
+                console.log(error.response?.data?.message);
+                setMsgBox(true);
+                setMsg(
+                error.response?.data?.message ||
+                "Something went wrong. Please try again."
+                );
+
+                
+            })
 
     }
 

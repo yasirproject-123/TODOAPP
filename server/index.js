@@ -203,14 +203,14 @@ app.post("/reset-password", async (req, res) => {
     const isMatch = await bcrypt.compare(oldPassword, user.password)
 
     if (!isMatch) {
-      return res.json({
-        message: "old password is not matching"
+      return res.status(400).json({
+        message: "old password is incorrect"
       })
     }
     
 
     if (oldPassword === confirmNewPassword) {
-        return res.status(401).json({
+        return res.status(400).json({
           message:'Try new password from old one'
         })
     }
