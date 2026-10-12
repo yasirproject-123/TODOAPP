@@ -54,7 +54,7 @@ const ResetPassword = () => {
                     <h5>Reset Password</h5>
 
                     {msgBox && (
-                        <p className={msg === "Matching" ? "match" : ""}>
+                        <p className={msg === "Matching" || "Password Changed" ? "match" : ""}>
                             {msg}
                         </p>
                     )}
