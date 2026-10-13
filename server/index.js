@@ -7,6 +7,9 @@ import cloudinary from "./cloudinary.js";
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 import cookieParser from "cookie-parser";
+import nodemailer from 'nodemailer'
+import crypto from 'crypto'
+
 
 const app = express();
 app.use(cookieParser());
@@ -46,6 +49,8 @@ app.get("/auth/me", (req, res) => {
     });
   }
 });
+
+//REGISTER
 
 app.post("/new-user", async(req, res) => {
   try {
@@ -87,6 +92,8 @@ app.post("/new-user", async(req, res) => {
   }
 })
 
+//LOGIN
+
 app.post("/login", async (req, res) => {
   try {
 
@@ -99,7 +106,7 @@ app.post("/login", async (req, res) => {
     );
 
     if (rows.length === 0) {
-      return res.status(401).json({
+      return res.status(400).json({
         message: "Invalid email or password"
       });
     }
@@ -113,7 +120,7 @@ app.post("/login", async (req, res) => {
     );
 
     if (!isMatch) {
-      return res.status(401).json({
+      return res.status(400).json({
         message: "Invalid email or password"
       });
     }
@@ -154,6 +161,8 @@ app.post("/login", async (req, res) => {
   }
 })
 
+//LOGOUT
+
 app.post('/logout', (req, res) => {
   res.clearCookie('token', {
     httpOnly: true,
@@ -166,6 +175,214 @@ app.post('/logout', (req, res) => {
     message: 'Logged out successfully',
   });
 });
+
+//RESET PASSWORD
+
+app.post("/reset-password", async (req, res) => {
+  try {
+    const token = req.cookies?.token;
+    const {oldPassword, confirmNewPassword} = req.body;
+
+    if (!token) {
+      return res.status(400).json({
+        message: "Token not found"
+      });
+    }
+
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET
+    );
+
+    console.log(decoded);
+
+    const userId = decoded.id
+    const email = decoded.email
+
+    const [rows] = await db.query("SELECT * FROM users where id = ? && email = ?",[userId, email])
+
+    const user = rows[0]
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password)
+
+    if (!isMatch) {
+      return res.status(400).json({
+        message: "old password is incorrect"
+      })
+    }
+    
+
+    if (oldPassword === confirmNewPassword) {
+        return res.status(400).json({
+          message:'Try new password from old one'
+        })
+    }
+
+    if (isMatch) {
+
+      const hashPassword = await bcrypt.hash(confirmNewPassword, 10)
+      await db.query("UPDATE users SET password = ? WHERE id = ? && email = ?",[hashPassword, userId, email])
+
+      return res.status(200).json({
+        message:'Password Changed'
+      });
+    }
+
+  } catch (error) {
+    return res.status(401).json({
+      message: "Invalid or expired token"
+    });
+  }
+});
+
+
+//FORGOT PASSWORD
+
+
+
+app.post("/forgot-password", async (req, res) => {
+  try {
+    const {
+      newPassword,
+      confirmNewPassword,
+      resetToken,
+    } = req.body;
+
+    // 1. Validate input
+    if (!newPassword || !confirmNewPassword || !resetToken) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
+
+    // 2. Check password confirmation
+    if (newPassword !== confirmNewPassword) {
+      return res.status(400).json({
+        message: "Passwords do not match",
+      });
+    }
+
+    // 3. Hash the token received from the email
+    const tokenHash = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    // 4. Find user with a valid, unexpired token
+    const [rows] = await db.query(
+      `SELECT id, password
+       FROM users
+       WHERE reset_token = ?
+       AND reset_token_expiry > NOW()`,
+      [tokenHash]
+    );
+
+    if (rows.length === 0) {
+      return res.status(400).json({
+        message: "Invalid or expired reset link. Request a new one.",
+      });
+    }
+
+    const user = rows[0];
+
+    // 5. Check whether the new password is the current password
+    const samePassword = await bcrypt.compare(
+      newPassword,
+      user.password
+    );
+
+    if (samePassword) {
+      return res.status(400).json({
+        message: "Please choose a different password",
+      });
+    }
+
+    // 6. Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // 7. Update password and invalidate reset token
+    const [result] = await db.query(
+      `UPDATE users
+       SET password = ?,
+           reset_token = NULL,
+           reset_token_expiry = NULL
+       WHERE id = ?`,
+      [hashedPassword, user.id]
+    );
+
+    if (result.affectedRows !== 1) {
+      return res.status(500).json({
+        message: "Password could not be updated",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Password updated successfully. Please log in.",
+    });
+
+  } catch (error) {
+    console.error("Reset password error:", error);
+
+    return res.status(500).json({
+      message: "Server error while updating password",
+    });
+  }
+});
+
+//reset-forgot-password
+
+app.post("/reset-forgot-password", async (req, res) => {
+  try {
+
+    const {newPassword, confirmNewPassword, resetToken} = req.body;
+
+    if (!newPassword || !confirmNewPassword) {
+      return res.status(401).json({
+        message: "Enter a new password"
+      });
+    }
+
+    if (!resetToken) {
+      return res.status(401).json({
+        message: "Token not found"
+      });
+    }
+
+
+
+    const [rows] = await db.query("SELECT * FROM users where id = ? && email = ?",[userId, email])
+
+    const user = rows[0]
+
+    const userId = user.id
+    const email = user.email
+    
+    if (user.password === confirmNewPassword) {
+        return res.status(400).json({
+          message:'Try new password from old one'
+        })
+    }
+
+    const isMatch = resetToken === user.reset_token;
+
+    if (isMatch) {
+
+      const hashPassword = await bcrypt.hash(confirmNewPassword, 10)
+      await db.query("UPDATE users SET password = ? WHERE id = ? && email = ?",[hashPassword, userId, email])
+
+      return res.status(200).json({
+        message:'Password Changed'
+      });
+    }
+
+  } catch (error) {
+    return res.status(401).json({
+      message: "Invalid or expired token"
+    });
+  }
+});
+
+
 
 app.get("/todos", async (req, res) => {
 
