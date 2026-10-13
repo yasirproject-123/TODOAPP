@@ -13,7 +13,7 @@ const ForgetPassword = () => {
 
   const [email, setEmail] = useState('')
   const [newPassword, setNewPassword] = useState('')
-  const [ConfirmPassword, setConfirmPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
   const [msg, setMsg] = useState('')
   const [loading, setLoading] = useState(false)
@@ -27,7 +27,7 @@ const ForgetPassword = () => {
       // STEP 1: Request password reset
       if (!resetToken) {
         const res = await axios.post(
-          `${API}/forgot-password`,
+          `${API}/send-reset-link`,
           { email },
           { withCredentials: true }
         )
@@ -37,16 +37,16 @@ const ForgetPassword = () => {
       }
 
       // STEP 2: Reset password using the token
-      if (newPassword !== ConfirmPassword) {
+      if (newPassword !== confirmPassword) {
         setMsg('Passwords do not match')
         return
       }
 
       const res = await axios.post(
-        `${API}/reset-forgot-password`,
+        `${API}/forgot-password`,
         {
           newPassword,
-          confirmNewPassword: ConfirmPassword,
+          confirmPassword,
           resetToken,
         },
         { withCredentials: true }
@@ -60,8 +60,11 @@ const ForgetPassword = () => {
     } catch (error) {
       setMsg(
         error.response?.data?.message ||
-        'Something went wrong. Please try again.'
+        'Something went wrong.'
       )
+      console.log(resetToken);
+      
+      
     } finally {
       setLoading(false)
     }
@@ -72,7 +75,7 @@ const ForgetPassword = () => {
       <form onSubmit={handleSubmit}>
         <div className="header">
           <h5>{resetToken ? 'Reset Password' : 'Forgot Password'}</h5>
-          <p>{msg}</p>
+          <p style={{display:'visible'}}>{msg}</p>
         </div>
 
         <div className="loginInput">
@@ -102,7 +105,7 @@ const ForgetPassword = () => {
                 minLength={8}
                 autoComplete="new-password"
                 placeholder="Confirm New Password"
-                value={ConfirmPassword}
+                value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </>
