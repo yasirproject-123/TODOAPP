@@ -4,6 +4,10 @@ import { NavLink, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 
 const ForgetPassword = () => {
+
+    const API = "https://todoapp-backend-4yfx.onrender.com"
+  // const API = "http://localhost:3000"
+
   const [searchParams] = useSearchParams()
   const resetToken = searchParams.get('token')
 
@@ -23,7 +27,7 @@ const ForgetPassword = () => {
       // STEP 1: Request password reset
       if (!resetToken) {
         const res = await axios.post(
-          'http://localhost:3000/forgot-password',
+          `${API}/forgot-password`,
           { email },
           { withCredentials: true }
         )
@@ -39,7 +43,7 @@ const ForgetPassword = () => {
       }
 
       const res = await axios.post(
-        'http://localhost:3000/reset-forgot-password',
+        `${API}/reset-forgot-password`,
         {
           newPassword,
           confirmNewPassword: ConfirmPassword,
