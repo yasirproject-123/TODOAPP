@@ -236,102 +236,114 @@ app.post("/reset-password", async (req, res) => {
 });
 
 
-//FORGOT PASSWORD
+/* FORGOT PASSWORD - SEND RESET EMAIL */
 
-
-
-app.post("/forgot-password", async (req, res) => {
+app.post("/send-reset-link", async (req, res) => {
   try {
-    const {
-      newPassword,
-      confirmNewPassword,
-      resetToken,
-    } = req.body;
+    const { email } = req.body;
 
-    // // 1. Validate input
-    // if (!newPassword || !confirmNewPassword || !resetToken) {
-    //   return res.status(400).json({
-    //     message: "All fields are required",
-    //   });
-    // }
-
-    // 2. Check password confirmation
-    if (newPassword !== confirmNewPassword) {
+    if (!email) {
       return res.status(400).json({
-        message: "Passwords do not match",
+        message: "Email is required",
       });
     }
 
-    // 3. Hash the token received from the email
-    const tokenHash = crypto
-      .createHash("sha256")
-      .update(resetToken)
-      .digest("hex");
-
-    // 4. Find user with a valid, unexpired token
+    // 1. Check whether the user exists
     const [rows] = await db.query(
-      `SELECT id, password
-       FROM users
-       WHERE reset_token = ?
-       AND reset_token_expiry > NOW()`,
-      [tokenHash]
+      "SELECT id, email FROM users WHERE email = ?",
+      [email.trim()]
     );
 
+    // Use a generic response to avoid revealing registered emails
     if (rows.length === 0) {
-      return res.status(400).json({
-        message: "Invalid or expired reset link. Request a new one.",
+      return res.status(200).json({
+        message: "If that email is registered, a reset link will be sent.",
       });
     }
 
     const user = rows[0];
 
-    // 5. Check whether the new password is the current password
-    const samePassword = await bcrypt.compare(
-      newPassword,
-      user.password
-    );
+    // 2. Generate a secure reset token
+    const resetToken = crypto.randomBytes(32).toString("hex");
 
-    if (samePassword) {
-      return res.status(400).json({
-        message: "Please choose a different password",
-      });
-    }
+    // 3. Hash the token before storing it
+    const tokenHash = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
 
-    // 6. Hash the new password
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-    // 7. Update password and invalidate reset token
-    const [result] = await db.query(
+    // 4. Set expiry to 15 minutes
+    await db.query(
       `UPDATE users
-       SET password = ?,
-           reset_token = NULL,
-           reset_token_expiry = NULL
+       SET reset_token = ?,
+           reset_token_expiry = DATE_ADD(NOW(), INTERVAL 15 MINUTE)
        WHERE id = ?`,
-      [hashedPassword, user.id]
+      [tokenHash, user.id]
     );
 
-    if (result.affectedRows !== 1) {
-      return res.status(500).json({
-        message: "Password could not be updated",
-      });
-    }
+    // 5. Configure Nodemailer
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    // 6. Build the reset link
+    const frontendUrl = process.env.FRONTEND_URL.replace(/\/+$/, "");
+
+    const resetLink =
+      `${frontendUrl}/home/forgot-password?token=${resetToken}`;
+
+    // 7. Send the email
+    await transporter.sendMail({
+      from: `"TODOAPP" <${process.env.EMAIL_USER}>`,
+      to: user.email,
+      subject: "Reset Your TODOAPP Password",
+      text: `You requested a password reset.
+
+Click this link to reset your password:
+${resetLink}
+
+This link expires in 15 minutes.
+
+If you did not request this, you can ignore this email.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto;">
+          <h2>Reset Your Password</h2>
+          <p>You requested to reset your TODOAPP password.</p>
+          <p>
+            <a href="${resetLink}"
+               style="display:inline-block;padding:12px 20px;
+               background:#2563eb;color:white;text-decoration:none;
+               border-radius:6px;">
+              Reset Password
+            </a>
+          </p>
+          <p>This link expires in 15 minutes.</p>
+          <p>If you did not request this, please ignore this email.</p>
+        </div>
+      `,
+    });
 
     return res.status(200).json({
-      message: "Password updated successfully. Please log in.",
+      message: "If that email is registered, a reset link will be sent.",
     });
 
   } catch (error) {
-    console.error("Reset password error:", error);
+    console.error("Forgot password error:", error);
 
     return res.status(500).json({
-      message: "Server error while updating password",
+      message: "Unable to send the reset email. Please try again later.",
     });
   }
 });
 
+
 //reset-forgot-password
 
-app.post("/reset-forgot-password", async (req, res) => {
+app.post("/forgot-password", async (req, res) => {
   try {
 
     const {newPassword, confirmNewPassword, resetToken} = req.body;
