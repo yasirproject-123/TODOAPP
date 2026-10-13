@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -13,6 +13,8 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  const [msg, setMsg] = useState('')
+
   const handleSubmit =(e)=> {
     e.preventDefault()
 
@@ -23,7 +25,7 @@ const Login = () => {
       )
 
       .then((result)=>{
-        console.log(result.data.message);
+        setMsg(result.data.message);
         localStorage.setItem("token", JSON.stringify(result.data.token))
         navigate("/")
       })
@@ -38,7 +40,10 @@ const Login = () => {
       <form 
         onSubmit={handleSubmit}
       >
-        <h5>Login</h5>
+        <div className='header'>
+          <h5>Login</h5>
+          <p>{msg}</p>
+        </div>
 
         <div className='loginInput'>
 
@@ -54,7 +59,7 @@ const Login = () => {
           value={password}
           required
           placeholder='Password'
-          onChange={(e)=>setPassword(e.target.value)}
+          onChange={(e)=>{setPassword(e.target.value)}}
           />
 
           <div 
@@ -69,8 +74,12 @@ const Login = () => {
               <NavLink to={"/home/register"}>Register</NavLink>
             </button>
           </div>
+           
+             <NavLink className="reset-link" to={"/home/forgot-password"}>Forgot Password</NavLink>
 
           </div>
+          
+          
       </form>
 
       

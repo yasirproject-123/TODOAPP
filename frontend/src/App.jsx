@@ -8,6 +8,9 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import HomeMsg from "./components/HomeMsg"
+import ResetPassword from "./pages/ResetPassword"
+import ForgotPassword from "./pages/ForgotPassword"
+
 
 function App() {
 
@@ -19,12 +22,14 @@ function App() {
           <Route index element={<HomeMsg />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
         </Route>
 
 
         {/* Protected route */}
 
         <Route element={<ProtectedRoute />}>
+          <Route path="reset-password" element={<ResetPassword />} />
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Pending />} />
             <Route path="/todo-finished" element={<Finished />} />
