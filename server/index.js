@@ -248,12 +248,12 @@ app.post("/forgot-password", async (req, res) => {
       resetToken,
     } = req.body;
 
-    // 1. Validate input
-    if (!newPassword || !confirmNewPassword || !resetToken) {
-      return res.status(400).json({
-        message: "All fields are required",
-      });
-    }
+    // // 1. Validate input
+    // if (!newPassword || !confirmNewPassword || !resetToken) {
+    //   return res.status(400).json({
+    //     message: "All fields are required",
+    //   });
+    // }
 
     // 2. Check password confirmation
     if (newPassword !== confirmNewPassword) {
