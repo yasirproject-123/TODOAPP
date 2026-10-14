@@ -35,9 +35,9 @@ const ProtectedRoute = () => {
       
   }
 
-  if (!authenticated) {
-    return <Navigate to="/home" replace />;
-  }
+  //if (!authenticated) {
+   // return <Navigate to="/home" replace />;
+  //}
 
   return <Outlet />;
 };
