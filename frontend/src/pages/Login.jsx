@@ -25,12 +25,13 @@ const Login = () => {
       )
 
       .then((result)=>{
-        setMsg(result.data.message);
-        localStorage.setItem("token", JSON.stringify(result.data.token))
+        // setMsg(result.data.message);
+        // localStorage.setItem("token", JSON.stringify(result.data.token))
         navigate("/")
       })
 
       .catch((error)=>{
+        setMsg(error.response?.data?.message || error.message);
         console.log(error.response?.data?.message || error.message);
       })
   }
