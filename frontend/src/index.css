@@ -49,20 +49,20 @@ input {
     font-family: inherit;
 }
 
-.header{
+.header {
     position: relative;
-  background: #ffffffd0;
-  backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  align-items: center;
+    background: #ffffffd0;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
 }
 
-.shutter{
+.shutter {
     position: absolute;
     background: linear-gradient(135deg, #5f56e9, #4940d5);
-    top : -30px;
+    top: -30px;
     left: 50%;
     margin: 0;
     height: 50px;
@@ -73,12 +73,12 @@ input {
     transition: 1s;
 }
 
-.shutter.active{
+.shutter.active {
     top: 0px;
     box-shadow: 0 0 15px #d5d5d5;
 }
 
-.shutter button{
+.shutter button {
     height: 30px;
     color: rgb(255, 255, 255);
     background: #ff0022e9;
@@ -87,45 +87,46 @@ input {
     cursor: pointer;
 }
 
-.shutter i{
+.shutter i {
     position: absolute;
-    
+
     top: 65%;
     text-align: center;
-   width: 100%;
-   cursor: pointer;
-   color: #fff;
+    width: 100%;
+    cursor: pointer;
+    color: #fff;
 }
 
 @keyframes shutter {
-    0%{
-        top : -30px;
+    0% {
+        top: -30px;
     }
 
-    100%{
+    100% {
         top: 0;
     }
 }
 
-.header h4{
-  color: #0249a6;
-  margin-left: 15px;
-  font-size: 20px;
+.header h4 {
+    color: #0249a6;
+    margin-left: 15px;
+    font-size: 20px;
 }
 
-.header div:nth-child(1), .header div:nth-child(2){
-  display: flex;
-  flex-direction: row;
-  margin-right: 15px;
-  gap: 10px;
+.header div:nth-child(1),
+.header div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    margin-right: 15px;
+    gap: 10px;
 }
 
-.fa-bell{
-  color: #4e0c96;
+.fa-bell {
+    color: #4e0c96;
 }
 
-.fa-shake{
-  color: #ff0101;
+.fa-shake {
+    color: #ff0101;
 }
 
 
@@ -191,7 +192,7 @@ input {
    TODO PAGE GLASS PANEL
 ========================================================= */
 
-.todoList > * {
+.todoList>* {
     width: 100%;
     height: 100%;
 
@@ -200,11 +201,9 @@ input {
     overflow: hidden;
 
     background:
-        linear-gradient(
-            145deg,
+        linear-gradient(145deg,
             rgba(255, 255, 255, 0.78),
-            rgba(246, 249, 252, 0.64)
-        );
+            rgba(246, 249, 252, 0.64));
 
     border: 1px solid rgba(255, 255, 255, 0.95);
 
@@ -215,7 +214,7 @@ input {
         0 20px 50px rgba(57, 74, 91, 0.12),
         inset 0 1px 0 rgba(255, 255, 255, 0.95);
 
-    
+
 }
 
 
@@ -223,7 +222,7 @@ input {
    INPUT HEADER
 ========================================================= */
 
-.dailyForm{
+.dailyForm {
 
     min-height: 64px;
 
@@ -308,13 +307,13 @@ input {
 }
 
 .input input:nth-child(1) {
-  width: 65%;
-  margin-right: 5px;
+    width: 65%;
+    margin-right: 5px;
 }
 
 .input input:nth-child(2) {
-  width: 30%;
-   
+    width: 30%;
+
 }
 
 
@@ -335,8 +334,8 @@ input {
     transition: .2s;
 }
 
-.dailyForm button:hover{
-  transform: translateY(-2px);
+.dailyForm button:hover {
+    transform: translateY(-2px);
 }
 
 
@@ -397,8 +396,7 @@ input {
     scrollbar-width: thin;
 
     scrollbar-color:
-        rgba(148, 163, 184, 0.55)
-        transparent;
+        rgba(148, 163, 184, 0.55) transparent;
 }
 
 
@@ -427,11 +425,9 @@ input {
     border-radius: 15px;
 
     background:
-        linear-gradient(
-            110deg,
+        linear-gradient(110deg,
             rgba(255, 255, 255, 0.82),
-            rgba(249, 251, 253, 0.72)
-        );
+            rgba(249, 251, 253, 0.72));
 
     border: 1px solid rgba(255, 255, 255, 0.95);
 
@@ -521,7 +517,7 @@ input {
    Finish + attachment buttons.
 */
 
-.todo-wrapper > div:nth-child(2) {
+.todo-wrapper>div:nth-child(2) {
 
     flex-shrink: 0;
 
@@ -649,7 +645,7 @@ input {
    NO DATA
 ========================================================= */
 
-.todo-list-wrapper > div:not(.todo-wrapper) {
+.todo-list-wrapper>div:not(.todo-wrapper) {
 
     min-height: 180px;
 
@@ -706,7 +702,7 @@ input {
 
 /* Each attachment section */
 
-.attachments > div {
+.attachments>div {
 
     flex: 1;
 
@@ -876,8 +872,7 @@ input {
     scrollbar-width: thin;
 
     scrollbar-color:
-        rgba(148, 163, 184, 0.5)
-        transparent;
+        rgba(148, 163, 184, 0.5) transparent;
 }
 
 
@@ -931,7 +926,7 @@ input {
    So style the actual links here.
 */
 
-.buttons > a {
+.buttons>a {
 
     height: 54px;
 
@@ -959,13 +954,13 @@ input {
 }
 
 
-.buttons > a i {
+.buttons>a i {
 
     font-size: 18px;
 }
 
 
-.buttons > a:hover {
+.buttons>a:hover {
 
     background: #f0f2ff;
 
@@ -979,16 +974,14 @@ input {
    Active NavLink.
 */
 
-.buttons > a[aria-current="page"] {
+.buttons>a[aria-current="page"] {
 
     color: white !important;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #5f56e9,
-            #4940d5
-        );
+            #4940d5);
 
     box-shadow:
         0 8px 18px rgba(79, 70, 229, 0.23);
@@ -1083,11 +1076,9 @@ input {
     border: 1px solid rgba(255, 255, 255, 0.95);
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             rgba(255, 255, 255, 0.84),
-            rgba(247, 250, 253, 0.75)
-        );
+            rgba(247, 250, 253, 0.75));
 
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
@@ -1102,7 +1093,7 @@ input {
    Override your old inline Monthly Task styling.
 */
 
-.card > p {
+.card>p {
 
     width: auto !important;
 
@@ -1142,7 +1133,7 @@ input {
    Small purple square before Monthly Task
 */
 
-.card > p::before {
+.card>p::before {
 
     content: "✓";
 
@@ -1210,7 +1201,7 @@ input {
     padding-left: 30px;
 }
 
-.monthlyTask-todo-done::before{
+.monthlyTask-todo-done::before {
     position: absolute;
     content: '';
     height: 20px;
@@ -1221,16 +1212,16 @@ input {
 }
 
 
-.monthlyTask-todo-done::after{
+.monthlyTask-todo-done::after {
     position: absolute;
     content: '✓';
-    color:#039946;
+    color: #039946;
     top: 10px;
     left: 10px;
     border-radius: 50%;
 }
 
-.monthlyTask-todo-pending::before{
+.monthlyTask-todo-pending::before {
     position: absolute;
     content: '';
     height: 20px;
@@ -1241,10 +1232,10 @@ input {
 }
 
 
-.monthlyTask-todo-pending::after{
+.monthlyTask-todo-pending::after {
     position: absolute;
     content: '✕';
-    color:#fa3333;
+    color: #fa3333;
     top: 10px;
     left: 10px;
     font-size: 12px;
@@ -1265,11 +1256,9 @@ input {
     color: #158344;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #f0fff5,
-            #e9fff0
-        );
+            #e9fff0);
 
     border: 1px solid #b9edcc;
 
@@ -1285,11 +1274,9 @@ input {
     color: #db3333;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #fff8f8,
-            #fff1f1
-        );
+            #fff1f1);
 
     border: 1px solid #ffcaca;
 
@@ -1320,7 +1307,7 @@ input {
    Your input fields are wrapped in a div.
 */
 
-.monthlyTaskInput > div {
+.monthlyTaskInput>div {
 
     flex: 1;
 
@@ -1365,7 +1352,7 @@ input {
    Your plus/close is an <i>, not a button.
 */
 
-.monthlyTaskInput > i {
+.monthlyTaskInput>i {
 
     width: 40px;
     height: 40px;
@@ -1381,11 +1368,9 @@ input {
     border-radius: 11px;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #5e54e8,
-            #4940d4
-        );
+            #4940d4);
 
     color: white;
 
@@ -1398,7 +1383,7 @@ input {
 }
 
 
-.monthlyTaskInput > i:hover {
+.monthlyTaskInput>i:hover {
 
     transform: scale(1.06);
 }
@@ -1406,7 +1391,7 @@ input {
 
 /* Close */
 
-.monthlyTaskInput > i.fa-close {
+.monthlyTaskInput>i.fa-close {
 
     background: #fff0f0;
 
@@ -1471,7 +1456,7 @@ input {
 
 /* Default background */
 
-.bgContainer > div:first-child {
+.bgContainer>div:first-child {
 
     width: 100%;
 
@@ -1492,11 +1477,9 @@ input {
     cursor: pointer;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #dbeafe,
-            #eef2ff
-        );
+            #eef2ff);
 
     border: 2px solid transparent;
 
@@ -1504,7 +1487,7 @@ input {
 }
 
 
-.bgContainer > div:first-child:hover {
+.bgContainer>div:first-child:hover {
 
     border-color: #5b56df;
 
@@ -1512,7 +1495,7 @@ input {
 }
 
 
-.bgContainer > div:first-child p {
+.bgContainer>div:first-child p {
 
     color: #4b5563;
 
@@ -1582,10 +1565,10 @@ input {
    Your loader currently has 4 divs + text div.
 */
 
-.loader > div:nth-child(1),
-.loader > div:nth-child(2),
-.loader > div:nth-child(3),
-.loader > div:nth-child(4) {
+.loader>div:nth-child(1),
+.loader>div:nth-child(2),
+.loader>div:nth-child(3),
+.loader>div:nth-child(4) {
 
     position: absolute;
 
@@ -1593,17 +1576,17 @@ input {
 }
 
 
-.loader > div:nth-child(1) {
+.loader>div:nth-child(1) {
 
     width: 85px;
     height: 85px;
-    
+
     border-top: 3px solid #15ff00;
     animation: loaderSpin 1.1s linear infinite forwards;
 }
 
 
-.loader > div:nth-child(2) {
+.loader>div:nth-child(2) {
 
     width: 70px;
     height: 70px;
@@ -1615,7 +1598,7 @@ input {
 }
 
 
-.loader > div:nth-child(3) {
+.loader>div:nth-child(3) {
 
     width: 55px;
     height: 55px;
@@ -1625,7 +1608,7 @@ input {
 }
 
 
-.loader > div:nth-child(4) {
+.loader>div:nth-child(4) {
 
     width: 40px;
     height: 40px;
@@ -1635,7 +1618,7 @@ input {
 }
 
 
-.loader > div:nth-child(5) {
+.loader>div:nth-child(5) {
 
     position: relative;
 
@@ -1661,7 +1644,7 @@ input {
     }
 }
 
-.home{
+.home {
     align-items: center;
     justify-content: center;
     margin: auto;
@@ -1677,7 +1660,7 @@ input {
     overflow: hidden;
 }
 
-.home form{
+.home form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1691,20 +1674,20 @@ input {
     height: 80%;
     width: 50%;
     position: relative;
-   
+
 }
 
-.home form .loginInput{
+.home form .loginInput {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
     width: 80%;
     height: 90%;
-    
+
 }
 
-.home form .loginInput input{
+.home form .loginInput input {
     width: 100%;
     color: rgb(51, 65, 85);
     height: 40px;
@@ -1720,7 +1703,7 @@ input {
     transition: 0.2s;
 }
 
-.home form button:nth-child(1){
+.home form button:nth-child(1) {
     cursor: pointer;
     width: 30%;
     height: 40px;
@@ -1736,8 +1719,8 @@ input {
     transition: 0.2s;
 }
 
-.home form button:nth-child(2){
-     position: relative;
+.home form button:nth-child(2) {
+    position: relative;
     cursor: pointer;
     width: 65%;
     height: 40px;
@@ -1753,15 +1736,15 @@ input {
     transition: 0.2s;
 }
 
-.home form button:nth-child(2) a{
-   
+.home form button:nth-child(2) a {
+
     width: 100%;
     height: 100%;
     color: #fff !important;
-    
+
 }
 
-.home form button:nth-child(2) a::before{
+.home form button:nth-child(2) a::before {
     position: absolute;
     content: '';
     width: 100%;
@@ -1773,21 +1756,21 @@ input {
 
 /* Background video */
 .home-video {
-position: relative;
-inset: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;
-z-index: 0;
+    position: relative;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }
 
-.reset-link{
+.reset-link {
     position: absolute;
     top: 80%;
     text-decoration: underline;
 }
 
-.home .header{
+.home .header {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -1795,17 +1778,17 @@ z-index: 0;
     font-size: 20px;
 }
 
-.home .header p{
+.home .header p {
     color: #ff0000cc;
     font-size: 15px;
 }
 
-.home .header .match{
+.home .header .match {
     color: #00ff04cc;
     font-size: 15px;
 }
 
-.home-content{
+.home-content {
     position: absolute;
     color: #fff;
 }
@@ -1850,7 +1833,7 @@ z-index: 0;
     }
 
 
-    .todoList > * {
+    .todoList>* {
 
         height: auto;
 
@@ -1889,7 +1872,7 @@ z-index: 0;
     }
 
 
-    .buttons > a,
+    .buttons>a,
     .fa-bars {
 
         min-width: 65px;
@@ -2001,7 +1984,7 @@ z-index: 0;
     }
 
 
-    .todo-wrapper > div:nth-child(2) {
+    .todo-wrapper>div:nth-child(2) {
 
         gap: 4px;
     }
@@ -2059,7 +2042,7 @@ z-index: 0;
     }
 
 
-    .monthlyTaskInput > div {
+    .monthlyTaskInput>div {
 
         flex-direction: column;
     }
@@ -2086,49 +2069,49 @@ z-index: 0;
 
 @media (max-width: 430px) {
 
-  .contents{
+    .contents {
         overflow-y: auto;
         overflow-x: hidden;
         height: 100%;
-  }
+    }
 
-  .todo-list-wrapper{
-    max-height: 300px;
-  }
+    .todo-list-wrapper {
+        max-height: 300px;
+    }
 
-  .dailyForm{
-    gap: 5px;
-  }
+    .dailyForm {
+        gap: 5px;
+    }
 
-    .input{
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    gap: 5px;
-  }
+    .input {
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        gap: 5px;
+    }
 
-  .input h3{
-    text-align: center;
-  }
+    .input h3 {
+        text-align: center;
+    }
 
-  .input input:nth-child(1){
-    width: 100%;
-    margin: 0;
-  }
+    .input input:nth-child(1) {
+        width: 100%;
+        margin: 0;
+    }
 
-  .input input:nth-child(2){
-    width: 100%;
-    
-  }
+    .input input:nth-child(2) {
+        width: 100%;
+
+    }
 
 
-  .shutter{
-    left: 45%;
-  }
+    .shutter {
+        left: 45%;
+    }
 
-  .shutter button{
-    width: 100%;
-  }
+    .shutter button {
+        width: 100%;
+    }
 
     .todoList {
 
@@ -2169,7 +2152,7 @@ z-index: 0;
     }
 
 
-    .buttons > a,
+    .buttons>a,
     .fa-bars {
 
         height: 48px;
@@ -2179,18 +2162,18 @@ z-index: 0;
 
 
 
-    .buttons > a {
+    .buttons>a {
 
         font-size: 10px;
     }
 
 
-    .buttons > a i {
+    .buttons>a i {
 
         font-size: 15px;
     }
 
-    .monthlyTaskInput button{
+    .monthlyTaskInput button {
         color: white !important;
         background: linear-gradient(135deg, #5f56e9, #4940d5);
         box-shadow: 0 8px 18px rgba(79, 70, 229, 0.23);
@@ -2203,19 +2186,19 @@ z-index: 0;
         transition: .2s;
     }
 
-    .monthlyTaskInput button:hover{
+    .monthlyTaskInput button:hover {
         transform: translateY(-2px);
     }
 
 
 
-    .card > p {
+    .card>p {
 
         font-size: 17px !important;
     }
 
 
-    
+
 
     .monthlyTaskTodo {
 
@@ -2226,17 +2209,17 @@ z-index: 0;
         padding-left: 30px;
 
         width: 100%;
-        
+
     }
 
 
     .todo-wrapper {
 
         gap: 7px;
-        
+
     }
 
-    .attachments{
+    .attachments {
         position: absolute;
         z-index: 99999;
         top: 100%;
@@ -2258,54 +2241,54 @@ z-index: 0;
     }
 
     #root {
-    overflow: auto;
+        overflow: auto;
+    }
 
 
-    .header div{
-            
-            align-items: center;
-            gap: 5px;
-        }
-    
-        .header .bell p{
-            display: none;
-            
-        }
+    .header div {
 
-       .header p{
-            font-size: 13px;
-            margin: 0 15px;
-        }
+        align-items: center;
+        gap: 5px;
+    }
 
-        
-}
+    .header .bell p {
+        display: none;
 
-.home{
-    width: 90%;
-}
+    }
 
-.home form{
-    width: 90%;
-}
+    .header p {
+        font-size: 13px;
+        margin: 0 15px;
+    }
 
-.home-content h1{
-    font-size: 28px;
-}
 
-.home-content p{
-    font-size: 15px;
-}
 
-.home-content a {
-    background: #0800ff;
-    display: inline-block;
-    width: 70px;
-    padding: 5px;
-    text-align: center;
-    border-radius: 15px;
-    color: #fff;
-    margin-top: 15px;
-    font-size: 12px;
-}
+    .home {
+        width: 90%;
+    }
+
+    .home form {
+        width: 90%;
+    }
+
+    .home-content h1 {
+        font-size: 28px;
+    }
+
+    .home-content p {
+        font-size: 15px;
+    }
+
+    .home-content a {
+        background: #0800ff;
+        display: inline-block;
+        width: 70px;
+        padding: 5px;
+        text-align: center;
+        border-radius: 15px;
+        color: #fff;
+        margin-top: 15px;
+        font-size: 12px;
+    }
 
 }
