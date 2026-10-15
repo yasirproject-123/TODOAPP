@@ -20,11 +20,12 @@ const Register = () => {
     axios
       .post(`${API}/new-user`,{email, password})
       .then((result)=>{
-        console.log(result.data.message)
+        // console.log(result.data.message)
 
         navigate("/home/login")
       })
       .catch((error)=>{
+        setMsg(error.response?.data?.message || error.message);
         console.log(error.response?.data?.message);
       })
   }
