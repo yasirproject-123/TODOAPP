@@ -2267,8 +2267,13 @@ z-index: 0;
             gap: 5px;
         }
     
-        .header p{
+        .header .bell p{
             display: none;
+            
+        }
+
+       .header p{
+            font-size: 10px;
             
         }
 
