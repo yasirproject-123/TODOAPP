@@ -285,7 +285,7 @@ app.post("/send-reset-link", async (req, res) => {
     }
 
     const resetLink =
-      `${frontendUrl}/home/reset-password?token=${resetToken}`;
+      `${frontendUrl}/home/forgot-password?token=${resetToken}`;
 
     // 6. Send the email using Resend
     const { data, error } = await resend.emails.send({
