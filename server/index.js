@@ -9,6 +9,7 @@ import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
+import {Resend} from 'resend'
 
 const app = express();
 app.use(cookieParser());
@@ -226,102 +227,120 @@ app.post("/reset-password", async (req, res) => {
 
 /* FORGOT PASSWORD - SEND RESET EMAIL */
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 app.post("/send-reset-link", async (req, res) => {
   try {
     const { email } = req.body;
+    console.log(email);
+    
 
     if (!email) {
       return res.status(400).json({
+        success: false,
         message: "Email is required",
       });
     }
 
-    // 1. Check whether the user exists
-    const [rows] = await db.query(
+    // 1. Find the user
+    const [users] = await db.query(
       "SELECT id, email FROM users WHERE email = ?",
-      [email.trim()],
+      [email]
     );
 
-    // Use a generic response to avoid revealing registered emails
-    if (rows.length === 0) {
+    // Avoid revealing whether an account exists
+    if (users.length === 0) {
       return res.status(200).json({
-        message: "If that email is registered, a reset link will be sent.",
+        success: true,
+        message:
+          "If an account exists, a reset link will be sent.",
       });
     }
 
-    const user = rows[0];
+    const user = users[0];
 
     // 2. Generate a secure reset token
     const resetToken = crypto.randomBytes(32).toString("hex");
 
-    // 3. Hash the token before storing it
+    // 3. Hash the token before saving it
     const tokenHash = crypto
       .createHash("sha256")
       .update(resetToken)
       .digest("hex");
 
-    // 4. Set expiry to 15 minutes
+    // 4. Set token expiry to 15 minutes
     await db.query(
       `UPDATE users
        SET reset_token = ?,
            reset_token_expiry = DATE_ADD(NOW(), INTERVAL 15 MINUTE)
        WHERE id = ?`,
-      [tokenHash, user.id],
+      [tokenHash, user.id]
     );
 
-    // 5. Configure Nodemailer
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+    // 5. Build the reset link
+    const frontendUrl = process.env.FRONTEND_URL;
 
-    // 6. Build the reset link
-    const frontendUrl = process.env.FRONTEND_URL.replace(/\/+$/, "");
+    if (!frontendUrl) {
+      throw new Error("FRONTEND_URL is not configured");
+    }
 
-    const resetLink = `${frontendUrl}/home/forgot-password?token=${resetToken}`;
+    const resetLink =
+      `${frontendUrl}/home/reset-password?token=${resetToken}`;
 
-    // 7. Send the email
-    await transporter.sendMail({
-      from: `"TODOAPP" <${process.env.EMAIL_USER}>`,
-      to: user.email,
-      subject: "Reset Your TODOAPP Password",
-      text: `You requested a password reset.
-
-Click this link to reset your password:
-${resetLink}
-
-This link expires in 15 minutes.
-
-If you did not request this, you can ignore this email.`,
+    // 6. Send the email using Resend
+    const { data, error } = await resend.emails.send({
+      from: "Your App <onboarding@resend.dev>",
+      to: [user.email],
+      subject: "Reset Your Password",
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto;">
-          <h2>Reset Your Password</h2>
-          <p>You requested to reset your TODOAPP password.</p>
-          <p>
-            <a href="${resetLink}"
-               style="display:inline-block;padding:12px 20px;
-               background:#2563eb;color:white;text-decoration:none;
-               border-radius:6px;">
-              Reset Password
-            </a>
-          </p>
+        <div style="font-family: Arial, sans-serif; max-width: 520px; margin: auto;">
+          <h2>Password Reset</h2>
+          <p>We received a request to reset your password.</p>
+          <p>Click the button below to choose a new password.</p>
+
+          <a href="${resetLink}"
+             style="display: inline-block; padding: 12px 22px;
+                    background: #2563eb; color: white;
+                    text-decoration: none; border-radius: 6px;">
+            Reset Password
+          </a>
+
           <p>This link expires in 15 minutes.</p>
-          <p>If you did not request this, please ignore this email.</p>
+          <p>If you did not request a password reset, ignore this email.</p>
         </div>
       `,
     });
 
+    if (error) {
+      console.error("Resend email error:", error);
+
+      // Clear the token if email delivery was rejected
+      await db.query(
+        `UPDATE users
+         SET reset_token = NULL,
+             reset_token_expiry = NULL
+         WHERE id = ? AND reset_token = ?`,
+        [user.id, tokenHash]
+      );
+
+      return res.status(500).json({
+        success: false,
+        message: "Unable to send the reset email. Please try again.",
+      });
+    }
+
+    console.log("Reset email accepted by Resend:", data?.id);
+
     return res.status(200).json({
-      message: "If that email is registered, a reset link will be sent.",
+      success: true,
+      message: "If an account exists, a reset link will be sent.",
     });
   } catch (error) {
-    console.error("Forgot password error:", error);
+    console.error("Send reset link error:", error);
 
     return res.status(500).json({
-      message: "Unable to send the reset email. Please try again later.",
+      success: false,
+      message: "Something went wrong. Please try again later.",
     });
   }
 });
