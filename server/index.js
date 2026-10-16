@@ -253,7 +253,7 @@ app.post("/send-reset-link", async (req, res) => {
       return res.status(200).json({
         success: true,
         message:
-          "If an account exists, a reset link will be sent.",
+          "Reset link has been sent to you email addrres.",
       });
     }
 
@@ -289,7 +289,7 @@ app.post("/send-reset-link", async (req, res) => {
 
     // 6. Send the email using Resend
     const { data, error } = await resend.emails.send({
-      from: "Todo App <noreplay@todo.app.com>",
+      from: "Todo App <noreplay@task.reminder.com>",
       to: [user.email],
       subject: "Reset Your Password",
       html: `
