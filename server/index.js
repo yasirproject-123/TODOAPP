@@ -289,7 +289,7 @@ app.post("/send-reset-link", async (req, res) => {
 
     // 6. Send the email using Resend
     const { data, error } = await resend.emails.send({
-      from: "Your App <onboarding@resend.dev>",
+      from: "Todo App <noreplay@todo.app.com>",
       to: [user.email],
       subject: "Reset Your Password",
       html: `
