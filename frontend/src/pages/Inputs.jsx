@@ -21,12 +21,12 @@ const Inputs = ({ onTodoAdded }) => {
     e.preventDefault()
     
 
-    const token = localStorage.getItem('token')
+    // const token = localStorage.getItem('token')
     
-    if (!token) {
-      navigate("/home")
-      return
-    }
+    // if (!token) {
+    //   navigate("/home")
+    //   return
+    // }
     // console.log({ todo, type: "daily", specialDate: date });
     // setDate(currentDate)
 
