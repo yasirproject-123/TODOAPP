@@ -37,7 +37,7 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
         <div className="header register">
           <h5>Register</h5>
-          <p>${msg}</p>
+          <p>{msg}</p>
         </div>
 
         <div className='loginInput'>
