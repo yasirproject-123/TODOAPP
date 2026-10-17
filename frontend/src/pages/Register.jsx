@@ -13,6 +13,7 @@ const Register = () => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [msg, setMsg] = useState("")
 
   const handleSubmit =(e)=> {
     e.preventDefault()
@@ -20,6 +21,7 @@ const Register = () => {
     axios
       .post(`${API}/new-user`,{email, password})
       .then((result)=>{
+        setMsg(result.data.message)
         // console.log(result.data.message)
 
         navigate("/home/login")
@@ -33,7 +35,10 @@ const Register = () => {
   return (
     <div className='home'>
           <form onSubmit={handleSubmit}>
-        <h5>Register</h5>
+        <div className="header register">
+          <h5>Register</h5>
+          <p>${msg}</p>
+        </div>
 
         <div className='loginInput'>
 
