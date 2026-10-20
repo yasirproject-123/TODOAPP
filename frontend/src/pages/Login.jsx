@@ -25,7 +25,7 @@ const Login = () => {
       )
 
       .then((result)=>{
-        // setMsg(result.data.message);
+        setMsg(result.data.message);
         // localStorage.setItem("token", JSON.stringify(result.data.token))
         navigate("/")
       })
