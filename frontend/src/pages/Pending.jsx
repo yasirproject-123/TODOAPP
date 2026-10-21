@@ -62,7 +62,8 @@ const imageHandler = (id) => {
       );
     });
 };
-  const deleteImage =(id)=> {
+
+const deleteImage =(id)=> {
 
     axios
       .delete(`${API}/delete-image/${id}`)
