@@ -38,6 +38,17 @@ const Finished = () => {
 
   }
 
+  const deleteTodo = (id) => {
+    axios
+      .delete(`${API}/deleteTodo/${id}`)
+      .then((result) => {
+        // alert(result.data.message)
+        getTodos();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect(() => {
     getTodos()
   }, [])
@@ -79,6 +90,12 @@ const Finished = () => {
                   <span>
                     Restore
                   </span>
+                </button>
+
+                <button
+                  onClick={() => deleteTodo(todo.id)}
+                >
+                  <i className='fas fa-trash'></i>
                 </button>
               </div>
             </div>

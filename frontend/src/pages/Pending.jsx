@@ -116,6 +116,7 @@ const deleteImage =(id)=> {
                     <span>Finish</span>
                   </button>
                   <button
+                    className="btnPaperclip"
                     onClick={() => {
                       setAttachmentId(
                         attachmentId === todo.id ? null : todo.id,

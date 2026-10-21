@@ -110,8 +110,8 @@ const TotoPending = () => {
                   <p>{`Due on : ${todo.specialDate}`}</p>
                 </div>
                 <div>
-                  <button onClick={() => deleteTodo(todo.id)}>
-                    <i className="fas fa-trash"></i>
+                  <button onClick={() => deleteTodo(todo.id)} style={{color:"red", background:'#f8eded', borderColor:"#fac1c1"}}>
+                    <i className="fas fa-trash" style={{color:"red"}}></i>
                     <span>Delete</span>
                   </button>
                   <button
