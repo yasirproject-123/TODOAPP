@@ -53,7 +53,7 @@ const TotoPending = () => {
     const specialDate = updatingTodo.specialDate
     
     axios
-      .put(`${API}/${todoId}`, {todo, specialDate})
+      .put(`${API}/update-todo/${todoId}`, {todo, specialDate})
       .then((result)=>{
         setUpdatingTodo({
           todoId:"",
@@ -163,7 +163,23 @@ const TotoPending = () => {
         }
         {
           editingMode && (
-            <button type="submit">Update</button>
+            <div className="editing-div-buttons">
+              <button type="submit">Update</button>
+              <i 
+              className="fas fa-close"
+              title="close"
+              type="button"
+              onClick={()=>{
+                setUpdatingTodo({
+                  todoId:"",
+                  todo:"",
+                  specialDate:""
+                })
+                setEditingMode(false)
+              }}
+              ></i>
+            </div>
+            
           )
         }
       </form>

@@ -1805,6 +1805,34 @@ input {
 }
 
 
+.editing-div-buttons{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.editing-div-buttons i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8dddd;
+    border: 1px solid #fdbaba;
+    color: red;
+    min-height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.editing-div-buttons i:hover {
+    transform: translateY(-2px);
+    background: red;
+    color: #fff;
+}
+
+
+
 /* =========================================================
    TABLET
 ========================================================= */
