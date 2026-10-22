@@ -23,18 +23,6 @@ const TotoPending = () => {
       });
   };
 
-  const deleteTodo = (id) => {
-    axios
-      .delete(`${API}/deleteTodo/${id}`)
-      .then((result) => {
-        // alert(result.data.message)
-        getTodos();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const imageHandler = (id) => {
     if (!selectedImage) {
       return alert("Select a File");
