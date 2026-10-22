@@ -23,17 +23,56 @@ const TotoPending = () => {
       });
   };
 
-  const deleteTodo = (id) => {
+  //UPDATE SECTION
+
+  const [editingMode, setEditingMode] = useState(false)
+
+  const [updatingTodo, setUpdatingTodo] = useState({
+    todoId:"",
+    todo:"",
+    specialDate:""
+  })
+
+  const getUpdateTodo = (todoId, todo, specialDate) => {
+
+    setEditingMode(true)
+
+    setUpdatingTodo({
+      todoId:todoId,
+      todo:todo,
+      specialDate:specialDate
+    })
+    
+  }
+
+  const updateTodo = (e) => {
+    e.preventDefault()
+
+    const todoId = updatingTodo.todoId
+    const todo = updatingTodo.todo;
+    const specialDate = updatingTodo.specialDate
+    
     axios
-      .delete(`${API}/deleteTodo/${id}`)
-      .then((result) => {
-        // alert(result.data.message)
+      .put(`${API}/${todoId}`, {todo, specialDate})
+      .then((result)=>{
+        setUpdatingTodo({
+          todoId:"",
+          todo:"",
+          specialDate:""
+        })
+        setEditingMode(false)
         getTodos();
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+      .catch((error)=>{
+        
+        console.log(error.response?.data?.message || error.message);
+      })
+
+    
+  }
+
+
+  //IMAGE SECTION
 
   const imageHandler = (id) => {
     if (!selectedImage) {
@@ -96,9 +135,38 @@ const TotoPending = () => {
 
   return (
     <div>
-      <div className="dailyForm">
-        <h3 className="input">Up Comings </h3>
-      </div>
+      <form onSubmit={updateTodo} className="dailyForm">
+        
+        {editingMode ? (
+          
+            <div className="input">
+
+            <input
+              type="text"
+              placeholder="Todo"
+              required
+              value={updatingTodo.todo}
+              onChange={(e) => {setUpdatingTodo({...updatingTodo, todo:e.target.value})}}
+              />
+            <input
+              type="date"
+              title="Date"
+              required
+              value={updatingTodo.specialDate}
+              onChange={(e) => {setUpdatingTodo({...updatingTodo,specialDate:e.target.value})}}
+              />
+            </div>
+            
+              
+          ):<h3 className="input">Up Comings </h3>
+          
+        }
+        {
+          editingMode && (
+            <button type="submit">Update</button>
+          )
+        }
+      </form>
 
       <div className="todo-list-wrapper">
         {pendinTodos.length > 0 ? (
@@ -110,9 +178,19 @@ const TotoPending = () => {
                   <p>{`Due on : ${todo.specialDate}`}</p>
                 </div>
                 <div>
-                  <button onClick={() => deleteTodo(todo.id)} style={{color:"red", background:'#f8eded', borderColor:"#fac1c1"}}>
-                    <i className="fas fa-trash" style={{color:"red"}}></i>
-                    <span>Delete</span>
+                  <button
+                    onClick={() => {
+                      getUpdateTodo(todo.id, todo.todo, todo.specialDate);
+                      
+                    }}
+                    style={{
+                      color: "#ff026b",
+                      background: "#faebf1",
+                      borderColor: "#fcbdd7",
+                    }}
+                  >
+                    <i className="fas fa-edit" style={{ color: "#ff026b" }}></i>
+                    <span>Edit</span>
                   </button>
                   <button
                     onClick={() => {
@@ -125,22 +203,22 @@ const TotoPending = () => {
                   </button>
                 </div>
                 {attachmentId === todo.id && (
-                  <div 
-                    className="attachments"
-                  
-                  >
+                  <div className="attachments">
                     <div>
                       <label className="image-upload">
-                        <i className="fas fa-folder-open" style={{color:'#0084ff'}}></i>
-                        <p>{!selectedImage ? 'Select image': selectedImage.name
-                        }</p>
+                        <i
+                          className="fas fa-folder-open"
+                          style={{ color: "#0084ff" }}
+                        ></i>
+                        <p>
+                          {!selectedImage ? "Select image" : selectedImage.name}
+                        </p>
 
                         <input
                           type="file"
                           accept="image/*"
                           onChange={(e) => {
                             setSelectedImage(e.target.files[0]);
-                            
                           }}
                         />
                       </label>
@@ -148,21 +226,20 @@ const TotoPending = () => {
                     </div>
 
                     <div>
-                      {todo.image_url ?(
-                        <img
-                          src={todo.image_url}
-                          alt="attachment"
-                        />
-                      ):
+                      {todo.image_url ? (
+                        <img src={todo.image_url} alt="attachment" />
+                      ) : (
                         <label className="image-upload">
-                            <i className="fas fa-image" style={{color:'#0084ff'}}></i>
-                        <p style={{fontFamily:'calibri'}}>No image</p>
+                          <i
+                            className="fas fa-image"
+                            style={{ color: "#0084ff" }}
+                          ></i>
+                          <p style={{ fontFamily: "calibri" }}>No image</p>
                         </label>
-                      }
+                      )}
                       <button
                         onClick={() => {
                           deleteImage(todo.id);
-                          
                         }}
                       >
                         Remove

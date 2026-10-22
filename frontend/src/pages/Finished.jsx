@@ -39,16 +39,19 @@ const Finished = () => {
   }
 
   const deleteTodo = (id) => {
-    axios
-      .delete(`${API}/deleteTodo/${id}`)
-      .then((result) => {
-        // alert(result.data.message)
-        getTodos();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if(confirm(`Do You Want To Delete The Task ?!`)){
+      axios
+        .delete(`${API}/deleteTodo/${id}`)
+        .then((result) => {
+          // alert(result.data.message)
+          getTodos();
+        })
+        .catch((error) => {
+          console.log(error.respose?.data?.message);
+        });
+    }
   };
+
   useEffect(() => {
     getTodos()
   }, [])

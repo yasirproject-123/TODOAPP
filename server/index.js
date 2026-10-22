@@ -650,6 +650,8 @@ app.put("/todos/:id/complete", async (req, res) => {
   }
 });
 
+// Restore Todo
+
 app.put("/retreive-todo/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -705,6 +707,49 @@ app.put("/retreive-todo/:id", async (req, res) => {
     });
   }
 });
+
+//Update Todo
+
+
+app.put("/update-todo/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { todo, specialDate } = req.body;
+
+    const [rows] = await db.query(
+      "SELECT id FROM todolist WHERE id = ?",
+      [id]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({
+        message: "Todo not found",
+      });
+    }
+
+    await db.query(
+      `UPDATE todolist
+       SET todo = ?,
+           specialDate = ?,
+           lastCompleted = NULL
+       WHERE id = ?`,
+      [todo, specialDate || null, id]
+    );
+
+    return res.status(200).json({
+      message: "Todo updated successfully",
+    });
+  } catch (error) {
+  console.error("UPDATE TODO ERROR:", error);
+
+  return res.status(500).json({
+    message: "Internal server error",
+    error: error.message,
+  });
+}
+});
+
+//Delete Todo
 
 app.delete("/deleteTodo/:id", async (req, res) => {
   try {
