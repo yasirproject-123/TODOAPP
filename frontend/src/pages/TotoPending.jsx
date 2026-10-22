@@ -53,7 +53,7 @@ const TotoPending = () => {
     const specialDate = updatingTodo.specialDate
     
     axios
-      .put(`${API}/${todoId}`, {todo, specialDate})
+      .put(`${API}/update-todo/${todoId}`, {todo, specialDate})
       .then((result)=>{
         setUpdatingTodo({
           todoId:"",
