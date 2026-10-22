@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import logo from "/logo.png"
 
 
 const Header = () => {
@@ -56,7 +57,10 @@ const Header = () => {
 
   return (
     <div className='header'>
-      <h4>TODO APP</h4>
+      <div style={{marginLeft:'15px', alignItems:'center'}}>
+        <img src={logo} width="30px" alt="" />
+        <h4>TODO APP</h4>
+      </div>
 
       <div className='bell'>
         <p>{todoPending.length <= 0 ? "Up to Dated" : `Date Due Items Found ( ${todoPending.length} )`}</p>
