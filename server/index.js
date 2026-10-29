@@ -438,7 +438,12 @@ app.post("/forgot-password", async (req, res) => {
 app.get("/todos", async (req, res) => {
   try {
     // 1. Get the JWT from the cookie
-    const token = req.cookies?.token;
+    // const token = req.cookies?.token;
+    const authHeader = req.headers.authorization;
+
+    const token = authHeader?.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : req.cookies?.token;
 
     if (!token) {
       return res.status(401).json({
@@ -556,7 +561,12 @@ app.get("/todos/today", async (req, res) => {
 app.post("/newTodo", async (req, res) => {
   try {
     // 1. Get the JWT from the cookie
-    const token = req.cookies?.token;
+    // const token = req.cookies?.token;
+    const authHeader = req.headers.authorization;
+
+    const token = authHeader?.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : req.cookies?.token;
 
     if (!token) {
       return res.status(401).json({
