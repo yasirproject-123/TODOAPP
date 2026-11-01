@@ -23,26 +23,34 @@ app.use(
 app.use(express.json());
 
 app.get("/auth/me", (req, res) => {
-  const token = req.cookies?.token;
 
-  if (!token) {
-    return res.status(401).json({
-      authenticated: false,
-    });
-  }
+    const authHeader = req.headers.authorization;
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const token = authHeader?.startsWith("Bearer ")
+        ? authHeader.split(" ")[1]
+        : req.cookies?.token;
 
-    return res.json({
-      authenticated: true,
-      user: decoded,
-    });
-  } catch (error) {
-    return res.status(401).json({
-      authenticated: false,
-    });
-  }
+    if (!token) {
+        return res.status(401).json({
+            authenticated: false,
+            message: "Please login"
+        });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        return res.status(200).json({
+            authenticated: true,
+            user: decoded
+        });
+
+    } catch (error) {
+        return res.status(401).json({
+            authenticated: false,
+            message: "Invalid or expired token"
+        });
+    }
 });
 
 //REGISTER
