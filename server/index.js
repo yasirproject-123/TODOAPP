@@ -710,7 +710,8 @@ app.put("/retreive-todo/:id", async (req, res) => {
       await db.query(
         `
                 UPDATE todolist
-                SET lastCompleted = null
+                SET specialDate = DATE_SUB(specialDate, INTERVAL 1 MONTH), 
+                lastCompleted = null
                 WHERE id = ?
                 `,
         [id],
